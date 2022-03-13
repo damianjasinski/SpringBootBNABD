@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+
 @Component
 public class RunAtStart {
     private final EmployeeRepository employeeRepository;
@@ -35,7 +36,7 @@ public class RunAtStart {
         List<Employee> employees = employeeRepository.findAllWhereName("Pan");
 
         for (Employee emp: employees) {
-            System.out.println(emp);
+            System.out.println(emp.getFirstName()+ " " + emp.getLastName()+ " " + emp.getSalary()+ " " + emp.getDepartment());
         }
 
 

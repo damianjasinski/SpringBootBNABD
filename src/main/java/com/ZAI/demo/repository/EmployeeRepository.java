@@ -10,7 +10,7 @@ import java.util.List;
 public interface EmployeeRepository extends CrudRepository<Employee,Long> {
 
     @Query("SELECT e FROM Employee e WHERE e.firstName LIKE %?1")
-    List<Employee> findAllWhereName(String username);
+    List<Employee> findAllWhereName(String firstName);
 
-    //List<User> findByUsername(String username);
+//    List<Employee> findByUsername(String username);
 }
