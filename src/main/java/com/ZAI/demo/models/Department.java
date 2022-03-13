@@ -5,24 +5,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Users")
-public class User {
+@NoArgsConstructor
+public class Department {
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
     private long id;
 
-    @Column
-    private String userName;
+    private String dName;
 
-    @Column
-    private String password;
+    @OneToMany(mappedBy = "id")
+    private Set<Employee> user;
 
+    public Department(String dName) {
+        this.dName = dName;
+    }
 }
