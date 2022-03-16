@@ -21,7 +21,6 @@ public class RunAtStart {
 
     @PostConstruct
     public void initUser() {
-
         Department department1 = new Department("RND");
         departmentRepository.save(department1);
 
@@ -31,6 +30,7 @@ public class RunAtStart {
         employeeRepository.save(new Employee("Pan", "Kracy", 1234, department1));
         employeeRepository.save(new Employee("Pan", "Kracy", 1234, department1));
         employeeRepository.save(new Employee("Pan", "Kracy", 1234, department1));
+
 
         List<Employee> employees = employeeRepository.findAllWhereName("Pan");
 
