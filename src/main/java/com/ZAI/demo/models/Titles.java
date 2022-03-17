@@ -1,30 +1,25 @@
 package com.ZAI.demo.models;
 
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Set;
 
-@Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Order {
-
+public class Titles {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    LocalDate createdAt;
+    String name;
+    int length;
 
-    @ManyToOne()
-    private Users user;
+    @OneToMany(mappedBy = "titles")
+    private Set<Seance> seanceSet;
 
-    @ManyToOne()
-    private SeatReserved seatReserved;
+    @ManyToMany
+    private Set<Category> categorySet;
 
-    @ManyToOne()
-    private Seance seance;
 }
