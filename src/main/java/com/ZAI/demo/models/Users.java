@@ -27,13 +27,13 @@ public class Users {
     String email;
     String role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "users")
     private Set<Payment> paymentSet;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "users")
     private Set<Order> orderSet;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "users")
     private Set<PaymentCard> paymentCardSet;
 
 

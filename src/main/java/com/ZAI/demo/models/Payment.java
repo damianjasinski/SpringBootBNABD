@@ -26,6 +26,6 @@ public class Payment {
     private PaymentCard paymentCard;
 
     @ManyToOne()
-    private Users user;
+    private Users users;
 
 }

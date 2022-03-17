@@ -22,7 +22,7 @@ public class PaymentCard {
     int cvv;
 
     @ManyToOne()
-    private Users user;
+    private Users users;
 
     @OneToMany(mappedBy = "paymentCard")
     private Set<Payment> paymentSet;

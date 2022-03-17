@@ -17,7 +17,11 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToMany(mappedBy = "seat")
-    private Set<SeatReserved> seatReserved;
+    @ManyToMany
+    @JoinTable(
+            name = "seat_order",
+            joinColumns = @JoinColumn(name = "seat_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id"))
+    private Set<Order> orderSet;
 
 }

@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "orders")
 public class Order {
 
     @Id
@@ -20,10 +21,10 @@ public class Order {
     LocalDate createdAt;
 
     @ManyToOne()
-    private Users user;
+    private Users users;
 
-    @ManyToOne()
-    private SeatReserved seatReserved;
+    @ManyToMany(mappedBy = "orderSet")
+    private Set<Seat> seatSet;
 
     @ManyToOne()
     private Seance seance;
