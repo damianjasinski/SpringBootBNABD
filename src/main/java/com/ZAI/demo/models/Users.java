@@ -1,0 +1,42 @@
+package com.ZAI.demo.models;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import java.time.LocalDate;
+import java.util.Set;
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class Users {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    String username;
+    String password;
+    LocalDate createdAt;
+    @Column(unique = true)
+    @Email
+    String email;
+    String role;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Payment> paymentSet;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orderSet;
+
+    @OneToMany(mappedBy = "user")
+    private Set<PaymentCard> paymentCardSet;
+
+
+
+
+}
