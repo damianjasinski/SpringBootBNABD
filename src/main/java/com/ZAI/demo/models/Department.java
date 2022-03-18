@@ -20,8 +20,8 @@ public class Department {
 
     private String dName;
 
-    @OneToMany(mappedBy = "id")
-    private Set<Employee> user;
+    @OneToMany(mappedBy = "department")
+    private Set<Employee> employee;
 
     public Department(String dName) {
         this.dName = dName;

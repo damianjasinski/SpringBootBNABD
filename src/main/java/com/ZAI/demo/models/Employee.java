@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 
@@ -22,16 +23,12 @@ public class Employee {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private long id;
+    private long emp_id;
 
-    @Column
     private String firstName;
 
-    @Column
     private String lastName;
 
-    @Column
     private double salary;
 
     @ManyToOne()
