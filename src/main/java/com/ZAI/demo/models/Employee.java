@@ -12,6 +12,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employee {
+
+    public Employee(String firstName, String lastName, double salary, Department department){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.salary = salary;
+        this.department = department;
+    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,10 +37,5 @@ public class Employee {
     @ManyToOne()
     private Department department;
 
-    public Employee(String firstName, String lastName, double salary, Department department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.salary = salary;
-        this.department = department;
-    }
+
 }

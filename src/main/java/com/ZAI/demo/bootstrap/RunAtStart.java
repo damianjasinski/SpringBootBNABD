@@ -34,10 +34,9 @@ public class RunAtStart {
 
         List<Employee> employees = employeeRepository.findAllWhereName("Pan");
 
-        for (Employee emp: employees) {
-            System.out.println(emp);
-        }
-
-
+//        for (Employee emp: employees) {
+//            System.out.println(emp);
+//        }
     }
+
 }
