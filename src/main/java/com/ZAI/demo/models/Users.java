@@ -1,9 +1,11 @@
 package com.ZAI.demo.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -14,7 +16,9 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
+@EqualsAndHashCode(exclude = "paymentCardSet")
 public class Users {
 
     @Id
@@ -30,14 +34,16 @@ public class Users {
     String email;
     String role;
 
+
     @OneToMany(mappedBy = "users")
     private Set<Payment> paymentSet;
 
     @OneToMany(mappedBy = "users")
     private Set<Order> orderSet;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "users")
-    private Set<PaymentCard> paymentCardSet;
+    public Set<PaymentCard> paymentCardSet;
 
 
 

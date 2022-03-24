@@ -22,14 +22,12 @@ public class RunAtStart {
     @PostConstruct
     public void initUser() {
 
-        PaymentCard paymentCard = new PaymentCard(123123123L, LocalDate.now(), 334, null, null);
-        Set<PaymentCard> paymentCardSet = new HashSet<>();
-        paymentCardSet.add(paymentCard);
-        paymentCardRepository.save(paymentCard);
-        Users user1 = new Users(123L, "Pankracy", "123", LocalDate.now(),
-                "pankracy@gmail.com", "USER", null, null, paymentCardSet);
-
+        Users user1 = new Users(null, "Pankracy", "123", LocalDate.now(),
+                "pankracy@gmail.com", "USER", null, null, null);
         usersRepository.save(user1);
+
+        PaymentCard paymentCard = new PaymentCard(123123123L, LocalDate.now(), 334, user1, null);
+        paymentCardRepository.save(paymentCard);
 
 //        Department department1 = new Department("RND");
 //        departmentRepository.save(department1);

@@ -1,9 +1,11 @@
 package com.ZAI.demo.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,10 +22,15 @@ public class PaymentCard {
     LocalDate expDate;
     int cvv;
 
+    @JsonBackReference
     @ManyToOne()
-    private Users users;
+    public Users users;
 
-    @OneToMany(mappedBy = "paymentCard")
+
+
+    @OneToMany(mappedBy = "paymentCard", fetch = FetchType.EAGER)
     private Set<Payment> paymentSet;
+
+
 
 }
