@@ -16,7 +16,6 @@ import java.util.Set;
 public class PaymentCard {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long card_number;
     LocalDate expDate;
     int cvv;

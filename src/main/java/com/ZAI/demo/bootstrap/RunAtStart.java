@@ -1,15 +1,36 @@
 package com.ZAI.demo.bootstrap;
 
+import com.ZAI.demo.models.PaymentCard;
+import com.ZAI.demo.models.Users;
+import com.ZAI.demo.repository.PaymentCardRepository;
+import com.ZAI.demo.repository.UsersRepository;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 @Component
+@Data
 public class RunAtStart {
 
+    private final PaymentCardRepository paymentCardRepository;
+    private final UsersRepository usersRepository;
 
     @PostConstruct
     public void initUser() {
+
+        PaymentCard paymentCard = new PaymentCard(123123123L, LocalDate.now(), 334, null, null);
+        Set<PaymentCard> paymentCardSet = new HashSet<>();
+        paymentCardSet.add(paymentCard);
+        paymentCardRepository.save(paymentCard);
+        Users user1 = new Users(123L, "Pankracy", "123", LocalDate.now(),
+                "pankracy@gmail.com", "USER", null, null, paymentCardSet);
+
+        usersRepository.save(user1);
+
 //        Department department1 = new Department("RND");
 //        departmentRepository.save(department1);
 //
@@ -26,6 +47,7 @@ public class RunAtStart {
 //        for (Employee emp: employees) {
 //            System.out.println(emp);
 //        }
+
 
 
     }

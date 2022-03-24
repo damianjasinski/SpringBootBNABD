@@ -4,6 +4,7 @@ package com.ZAI.demo.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -21,6 +22,8 @@ public class Users {
     private Long id;
     String username;
     String password;
+
+    @CreationTimestamp
     LocalDate createdAt;
     @Column(unique = true)
     @Email
