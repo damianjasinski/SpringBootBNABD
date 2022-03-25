@@ -1,0 +1,35 @@
+Opis endpointów:
+Kontroler powinien zawierać tylko przekierowania zapytania – logika powinna znaleźć się w odpowiednim dla modelu serwisie (np. UserService przy rejestracji użytkownika sprawdza czy dany użytkownik już istnieje).
+
+
+User
+•	api/user/signup  - endpoint dla rejestracji użytkownika (dostęp nieautoryzowany)
+•	api/user/login – endpoint dla logowania użytkownika (dostęp nieautoryzowany)
+•	api/user/change_password – endpoint dla zmiany hasła (dostęp autoryzowany)
+•	api/user/chane_email – endpoint dla zmiany emaila (dostęp autoryzowany)
+•	api/user/auth – endpoint dla autentykacji użytkownika (dostęp nieautoryzowany)
+Payment Card
+•	api/p_card/add – endpoint dla dodwania kart płatniczych (dostęp autoryzowany)
+•	api/p_card/remove – endpoint dla kasowania kart płatniczych (dostęp autoryzowany)
+Payment
+•	api/payment/generate – endpoint dla automatycznego odnotowywania płatności użytkownika (dostęp autoryzowany)
+•	api/payment/show – endpoint dla przeglądania płatności użytkownika (dostęp autoryzowany)
+
+Orders
+•	api/order/add – endpoint dla dodawania zamówień po tym jak użytkownik opłaci rezerwacje (dostęp autoryzowany)
+
+Seat
+•	api/seat/reserve{id, orderId} – endpoint dla rezerwowania miejsca na Sali (dostęp autoryzowany)
+
+Seance
+•	api/seance/add – endpoint dla tworzenia seansu (dostęp autoryzowany)
+•	api/seance/modify – endpoint dla modyfikowania seansu (dostęp autoryzowany)
+•	Api/seance/displayAll - endpoint dla wyświetlania seansów (dostęp nieautoryzowany)
+Room
+•	api/room/add – endpoint dla dodwania sal (dostęp autoryzowany)
+Titles
+•	api/titles/add – endpoint dla dodawania filmów (dostęp autoryzowany)
+•	api/titles/remove – endpoint dla usuwania filmów ( dostęp autoryzowany)
+Category
+•	api/category/add – endpoint dla dodawania kategorii (dostęp autoryzowany)
+•	api/category/remove – endpoint dla usuwania kategorii (dostęp autoryzowany)
