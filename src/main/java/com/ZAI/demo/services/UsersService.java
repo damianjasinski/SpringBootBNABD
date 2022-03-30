@@ -45,6 +45,10 @@ public class UsersService {
 
     }
 
+    public Users getById(long id) {
+        return usersRepository.findById(id).orElseThrow();
+    }
+
     public boolean changeUserEmail(String password, String email, Long userId){
         Optional <Users> user = usersRepository.findById(userId);
         if(user.isPresent()){
