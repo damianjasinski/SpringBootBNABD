@@ -1,5 +1,6 @@
 package com.ZAI.demo.services;
 
+import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.repository.UsersRepository;
 import lombok.AllArgsConstructor;
@@ -46,7 +47,7 @@ public class UsersService {
     }
 
     public Users getById(long id) {
-        return usersRepository.findById(id).orElseThrow();
+        return usersRepository.findById(id).orElseThrow(() -> new NotFoundException("User Not found"));
     }
 
     public boolean changeUserEmail(String password, String email, Long userId){
