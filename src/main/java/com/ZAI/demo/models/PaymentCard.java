@@ -2,12 +2,13 @@ package com.ZAI.demo.models;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -17,11 +18,21 @@ import java.util.Set;
 @AllArgsConstructor
 public class PaymentCard {
 
+    //TODO check if id key can be String + Unique + Pattern annotation
     @Id
-    private long card_number;
-    LocalDate expDate;
-    int cvv;
+    @NotNull
+    private long cardNumber;
 
+    @Basic
+    @NotNull
+    LocalDate expDate;
+
+    @NotNull
+    @Pattern(regexp = "[0-9]{3}")
+    String cvv;
+
+
+    //TODO constraint this foreign key
     @JsonBackReference
     @ManyToOne()
     public Users users;
