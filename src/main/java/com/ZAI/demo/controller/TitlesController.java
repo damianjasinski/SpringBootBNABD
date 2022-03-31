@@ -19,8 +19,8 @@ public class TitlesController {
         return new ResponseEntity<>(titles, HttpStatus.OK); // co jak blad?
     }
 
-    @DeleteMapping("/remove")
-    public void removeSeance(String name){ //request body?
+    @DeleteMapping("/remove/{name}")
+    public void removeSeance(@PathVariable String name){ //request body?
         titlesService.removeTitles(name);
     }
 

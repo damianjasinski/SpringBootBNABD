@@ -16,6 +16,7 @@ public class Category
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(unique = true)
     String name;
 
     @ManyToMany(mappedBy = "categorySet")
