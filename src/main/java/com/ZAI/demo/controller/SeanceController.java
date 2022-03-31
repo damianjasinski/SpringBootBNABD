@@ -27,7 +27,7 @@ public class SeanceController {
         seanceService.modifySeance(seance);
     }
 
-    @PostMapping("/displayAll")
+    @GetMapping("/displayAll")
     public List<Seance> displaySeances(){
         return seanceService.displayAll();
     }
