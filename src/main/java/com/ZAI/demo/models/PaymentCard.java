@@ -18,6 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class PaymentCard {
 
+    //TODO check if id key can be String + Unique + Pattern annotation
     @Id
     @NotNull
     private long cardNumber;
@@ -30,6 +31,8 @@ public class PaymentCard {
     @Pattern(regexp = "[0-9]{3}")
     String cvv;
 
+
+    //TODO constraint this foreign key
     @JsonBackReference
     @ManyToOne()
     public Users users;

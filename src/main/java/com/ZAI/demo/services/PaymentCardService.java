@@ -27,9 +27,7 @@ public class PaymentCardService {
     }
 
     public PaymentCard getPaymentCard(Long cardNumber) {
-        Optional<PaymentCard> checkCard = paymentCardRepository.findById(cardNumber);
-        if (checkCard.isEmpty()) throw new NotFoundException("Card number not found");
-        return checkCard.get();
+        return paymentCardRepository.findById(cardNumber).orElseThrow(() -> new NotFoundException("Card number not found"));
     }
 
 }
