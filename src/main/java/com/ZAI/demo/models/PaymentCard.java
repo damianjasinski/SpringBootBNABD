@@ -2,12 +2,13 @@ package com.ZAI.demo.models;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -18,9 +19,16 @@ import java.util.Set;
 public class PaymentCard {
 
     @Id
-    private long card_number;
+    @NotNull
+    private long cardNumber;
+
+    @Basic
+    @NotNull
     LocalDate expDate;
-    int cvv;
+
+    @NotNull
+    @Pattern(regexp = "[0-9]{3}")
+    String cvv;
 
     @JsonBackReference
     @ManyToOne()
