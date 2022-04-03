@@ -18,18 +18,22 @@ public class SeanceController {
     private final SeanceService seanceService;
 
     @PostMapping("/add")
-    public void addSeance(@RequestBody Seance seance){
+    public ResponseEntity<String> addSeance(@Valid @RequestBody Seance seance){
         seanceService.addSeance(seance);
+        return new ResponseEntity<>("Seance added succesfully", HttpStatus.OK);
     }
 
     @PostMapping("/modify")
-    public void modifySeance(@RequestBody Seance seance){
-        seanceService.modifySeance(seance);
+    public ResponseEntity<Seance> modifySeance(@Valid @RequestBody Seance seance){
+        Seance mseance = seanceService.modifySeance(seance);
+        return new ResponseEntity<>(mseance, HttpStatus.OK);
+
     }
 
     @GetMapping("/displayAll")
-    public List<Seance> displaySeances(){
-        return seanceService.displayAll();
+    public ResponseEntity<List<Seance>> displaySeances(){
+        List<Seance> seance = seanceService.displayAll();
+        return new ResponseEntity<>(seance, HttpStatus.OK);
     }
 
 }

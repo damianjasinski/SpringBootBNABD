@@ -1,5 +1,6 @@
 package com.ZAI.demo.services;
 
+import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Seance;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.repository.SeanceRepository;
@@ -20,15 +21,16 @@ public class SeanceService {
         seanceRepository.save(seance);
     }
 
-    public void modifySeance(Seance seance){
+    public Seance modifySeance(Seance seance){
         Optional <Seance> seances = seanceRepository.findById(seance.getId());
         if(seances.isPresent()){
             seances.get().setRoom(seance.getRoom());
             seances.get().setAdvertisement_time(seance.getAdvertisement_time());
             seances.get().setTitles(seance.getTitles());
             seances.get().setSeance_date(seance.getSeance_date());
+            return seance;
         }else{
-            //todo co robimy?
+            throw new NotFoundException("Seance number not found");
         }
     }
 

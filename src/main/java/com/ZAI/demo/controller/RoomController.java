@@ -19,8 +19,9 @@ public class RoomController{
     private final RoomService roomService;
 
     @PostMapping("/add")
-    public void addRoom(@RequestBody Room room){
+    public ResponseEntity<String> addRoom(@Valid @RequestBody Room room){
         roomService.addRoom(room);
+        return new ResponseEntity<>("Room added succesfully", HttpStatus.OK);
     }
 
 }

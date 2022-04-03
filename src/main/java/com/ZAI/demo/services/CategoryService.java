@@ -1,6 +1,7 @@
 package com.ZAI.demo.services;
 
 
+import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Category;
 import com.ZAI.demo.models.Titles;
 import com.ZAI.demo.repository.CategoryRepository;
@@ -18,13 +19,12 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
-    public boolean removeCategory(String name){
+    public void removeCategory(String name){
         Optional<Category> category = categoryRepository.findByName(name);
         if (category.isPresent()){
             categoryRepository.deleteById(category.get().getId());
-            return true;
         }else{
-            return false;
+            throw new NotFoundException("Category not found exception");
         }
     }
 

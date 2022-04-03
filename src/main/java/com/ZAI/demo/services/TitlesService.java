@@ -1,6 +1,7 @@
 package com.ZAI.demo.services;
 
 
+import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Titles;
 import com.ZAI.demo.repository.TitlesRepository;
 import lombok.AllArgsConstructor;
@@ -17,13 +18,12 @@ public class TitlesService {
         titlesRepository.save(titles);
     }
 
-    public boolean removeTitles(String name){
+    public void removeTitles(String name){
         Optional <Titles> titles = titlesRepository.findByName(name);
         if (titles.isPresent()){
             titlesRepository.deleteById(titles.get().getId());
-            return true;
         }else{
-            return false;
+            throw new NotFoundException("Title not found");
         }
     }
 }
