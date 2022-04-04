@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -17,9 +18,16 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long cardNumber;
+    private Long id;
+
+    @NotNull
     int ammount;
+
+    @Basic
+    @NotNull
     LocalDate createdAt;
+
+    @NotNull
     boolean finalized;
 
     @ManyToOne()
@@ -27,5 +35,8 @@ public class Payment {
 
     @ManyToOne()
     private Users users;
+
+    @OneToOne()
+    private Order order;
 
 }
