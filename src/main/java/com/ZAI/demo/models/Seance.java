@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -18,10 +19,11 @@ public class Seance {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotBlank
+    @Basic
+    @NotNull
     LocalDate seance_date;
 
-    @NotBlank
+    @NotNull
     int advertisement_time;
 
     @OneToMany(mappedBy = "seance")
