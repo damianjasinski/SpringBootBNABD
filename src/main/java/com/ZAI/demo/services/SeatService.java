@@ -20,14 +20,15 @@ public class SeatService {
     private final OrderService orderService;
     private final SeatRepository seatRepository;
 
-    public void test(Seat seat, Order order, long seanceId ) {
+    public void reserveSeat(Seat seat, Order order, long seanceId ) {
         Set<Order> orderSet = seat.getOrderSet();
         List<Order> isReserved = orderSet.stream()
-                .filter((x) -> x.getSeance().getId() >= 0)
+                .filter((x) -> x.getSeance().getId() == seanceId)
                 .collect(Collectors.toList());
         if (isReserved.isEmpty()) {
             orderSet.add(order);
             seat.setOrderSet(orderSet);
+            seatRepository.save(seat);
         } else {
             throw new NotFoundException("Seat is already reserverd on this seance");
         }
