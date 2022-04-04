@@ -7,9 +7,11 @@ import com.ZAI.demo.repository.OrderRepository;
 import com.ZAI.demo.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Data
+@Service
 public class OrderService {
 
     private final OrderRepository orderRepository;
