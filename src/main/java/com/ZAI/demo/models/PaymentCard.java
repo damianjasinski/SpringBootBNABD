@@ -35,6 +35,7 @@ public class PaymentCard {
     //TODO constraint this foreign key
     @JsonBackReference
     @ManyToOne()
+    @JoinColumn(nullable = false)
     public Users users;
 
 
