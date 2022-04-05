@@ -5,8 +5,7 @@ import com.ZAI.demo.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import java.time.LocalDate;
 
 @Service
 @Data
@@ -15,6 +14,7 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
 
     public boolean addPayment(Payment payment) {
+        payment.setCreatedAt(LocalDate.now());
         paymentRepository.save(payment);
         return true;
     }
