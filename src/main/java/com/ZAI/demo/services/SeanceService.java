@@ -25,9 +25,9 @@ public class SeanceService {
         Optional <Seance> seances = seanceRepository.findById(seance.getId());
         if(seances.isPresent()){
             seances.get().setRoom(seance.getRoom());
-            seances.get().setAdvertisement_time(seance.getAdvertisement_time());
+            seances.get().setAdvertisementTime(seance.getAdvertisementTime());
             seances.get().setTitles(seance.getTitles());
-            seances.get().setSeance_date(seance.getSeance_date());
+            seances.get().setSeanceDate(seance.getSeanceDate());
             return seance;
         }else{
             throw new NotFoundException("Seance number not found");
