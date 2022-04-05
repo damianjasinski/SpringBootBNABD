@@ -24,7 +24,6 @@ public class Payment {
     int ammount;
 
     @Basic
-    @NotNull
     LocalDate createdAt;
 
     @NotNull
@@ -33,8 +32,9 @@ public class Payment {
     @ManyToOne()
     private PaymentCard paymentCard;
 
-    @ManyToOne()
-    private Users users;
+//    @ManyToOne()
+//    @JoinColumn(nullable = false)
+//    private Users users;
 
     @OneToOne()
     private Order order;
