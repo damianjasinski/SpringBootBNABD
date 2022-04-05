@@ -25,18 +25,22 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @NotBlank(message = "Username cannot be empty!")
     String username;
+
     @NotBlank(message = "Password cannot be empty!")
     String password;
 
     @CreationTimestamp
     LocalDate createdAt;
+
     @Column(unique = true)
     @NotBlank(message = "Email cannot be empty!")
     @Email
     String email;
-    String role;
+
+    String role = "USER";
 
 
     @OneToMany(mappedBy = "users")
