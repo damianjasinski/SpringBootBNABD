@@ -23,7 +23,7 @@ public class RunAtStart {
     public void initUser() {
 
         Users user1 = new Users(null, "Pankracy", "123", LocalDate.now(),
-                "pankracy@gmail.com", "USER", null, null, null);
+                "pankracy@gmail.com", "USER", null, null);
         usersRepository.save(user1);
 
         PaymentCard paymentCard = new PaymentCard(123123123L, LocalDate.now(), "334", user1, null);
