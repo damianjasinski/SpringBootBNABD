@@ -21,10 +21,10 @@ public class Seance {
 
     @Basic
     @NotNull
-    LocalDate seance_date;
+    LocalDate seanceDate;
 
     @NotNull
-    int advertisement_time;
+    int advertisementTime;
 
     @OneToMany(mappedBy = "seance")
     private Set<Order> seanceSet;
