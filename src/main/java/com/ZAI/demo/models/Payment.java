@@ -30,6 +30,7 @@ public class Payment {
     boolean finalized;
 
     @ManyToOne()
+    @JoinColumn(nullable = false)
     private PaymentCard paymentCard;
 
 //    @ManyToOne()
