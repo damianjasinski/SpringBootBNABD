@@ -30,6 +30,6 @@ public class Order implements Serializable {
     @ManyToOne()
     private Seance seance;
 
-    @OneToOne(mappedBy = "order")
+    @OneToOne(mappedBy = "order", cascade=CascadeType.ALL)
     private Payment payment;
 }
