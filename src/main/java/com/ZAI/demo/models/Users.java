@@ -43,8 +43,8 @@ public class Users {
     String role = "USER";
 
 
-    @OneToMany(mappedBy = "users")
-    private Set<Payment> paymentSet;
+//    @OneToMany(mappedBy = "users")
+//    private Set<Payment> paymentSet;
 
     @OneToMany(mappedBy = "users")
     private Set<Order> orderSet;
