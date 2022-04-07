@@ -31,14 +31,11 @@ public class PaymentCard {
     @Pattern(regexp = "[0-9]{3}")
     String cvv;
 
-
     //TODO constraint this foreign key
     @JsonBackReference
     @ManyToOne()
     @JoinColumn(nullable = false)
     public Users users;
-
-
 
     @OneToMany(mappedBy = "paymentCard", fetch = FetchType.EAGER)
     private Set<Payment> paymentSet;
