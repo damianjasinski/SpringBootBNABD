@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -18,6 +19,9 @@ public class Titles {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Transient
+    private List<Long> categoriesId;
+
     @NotBlank
     String name;
 
@@ -27,7 +31,7 @@ public class Titles {
     @OneToMany(mappedBy = "titles")
     private Set<Seance> seanceSet;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
             name = "titles_category",
             joinColumns = @JoinColumn(name = "titles_id"),
