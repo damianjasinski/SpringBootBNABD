@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -19,9 +20,9 @@ public class SeanceController {
     private final SeanceService seanceService;
 
     @PostMapping("/add")
-    public ResponseEntity<String> addSeance(@Valid @RequestBody Seance seance){
-        seanceService.addSeance(seance);
-        return new ResponseEntity<>("Seance added succesfully", HttpStatus.OK);
+    public ResponseEntity<Map<String, Seance>> addSeance(@Valid @RequestBody Seance seance){
+        Seance seance1 = seanceService.addSeance(seance);
+        return new ResponseEntity<>(Map.of("Seance added succesfully", seance1), HttpStatus.OK);
     }
 
     @PostMapping("/modify")

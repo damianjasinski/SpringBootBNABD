@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,14 +19,14 @@ public class TitlesController {
 
     @PostMapping("/add")
     public ResponseEntity<Titles> addTitles(@Valid @RequestBody Titles titles){
-        titlesService.addTitles(titles);
-        return new ResponseEntity<>(titles, HttpStatus.OK);
+        Titles titles1 = titlesService.addTitles(titles);
+        return new ResponseEntity<>(titles1, HttpStatus.OK);
     }
 
     @DeleteMapping("/remove/{name}")
-    public ResponseEntity<String> removeSeance(@PathVariable String name){
-        titlesService.removeTitles(name);
-        return new ResponseEntity<>("Title removed succesfully", HttpStatus.OK);
+    public ResponseEntity<Map<String, Titles>> removeSeance(@PathVariable String name){
+        Titles titles = titlesService.removeTitles(name);
+        return new ResponseEntity<>(Map.of("Title removed succesfully", titles), HttpStatus.OK);
     }
 
 }

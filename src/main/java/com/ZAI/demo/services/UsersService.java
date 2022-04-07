@@ -24,10 +24,10 @@ public class UsersService {
         return usersRepository.findAll();
     }
 
-    public void signupUser(Users users){
+    public Users signupUser(Users users){
         Optional <Users> user = usersRepository.findByEmail(users.getEmail());
         if (user.isPresent()){throw new ResponseStatusException(HttpStatus.FORBIDDEN);}
-        usersRepository.save(users);
+        return usersRepository.save(users);
     }
 
     public boolean loginUser(String email, String password){

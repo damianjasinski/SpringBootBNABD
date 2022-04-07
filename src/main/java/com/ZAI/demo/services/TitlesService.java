@@ -21,24 +21,23 @@ public class TitlesService {
     private final TitlesRepository titlesRepository;
     private final CategoryRepository categoryRepository;
 
-    public void addTitles(Titles titles){
+    public Titles addTitles(Titles titles){
         List<Category> categories = categoryRepository.findAllById(titles.getCategoriesId());
 
         if (categories.size() != titles.getCategoriesId().size()){
             throw new NotFoundException("Category not found");
         }else{
             titles.setCategorySet(Set.copyOf(categories));
-            titlesRepository.save(titles);
+            return titlesRepository.save(titles);
         }
-
-        System.out.println(titles.getCategoriesId());
 
     }
 
-    public void removeTitles(String name){
+    public Titles removeTitles(String name){
         Optional <Titles> titles = titlesRepository.findByName(name);
         if (titles.isPresent()){
             titlesRepository.deleteById(titles.get().getId());
+            return titles.get();
         }else{
             throw new NotFoundException("Title not found");
         }

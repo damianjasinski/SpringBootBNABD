@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,9 +21,9 @@ public class RoomController{
     private final RoomService roomService;
 
     @PostMapping("/add")
-    public ResponseEntity<String> addRoom(@Valid @RequestBody Room room){
-        roomService.addRoom(room);
-        return new ResponseEntity<>("Room added succesfully", HttpStatus.OK);
+    public ResponseEntity<Map<String, Room>> addRoom(@Valid @RequestBody Room room){
+        Room room1 = roomService.addRoom(room);
+        return new ResponseEntity<>(Map.of("Room added succesfully", room1), HttpStatus.OK);
     }
 
 }

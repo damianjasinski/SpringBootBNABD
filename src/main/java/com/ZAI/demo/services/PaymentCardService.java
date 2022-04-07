@@ -15,16 +15,15 @@ import java.util.Optional;
 public class PaymentCardService {
     private final PaymentCardRepository paymentCardRepository;
 
-    public boolean addPaymentCard(PaymentCard paymentCard) {
-        paymentCardRepository.save(paymentCard);
-        return true;
+    public PaymentCard addPaymentCard(PaymentCard paymentCard) {
+        return paymentCardRepository.save(paymentCard);
     }
 
-    public boolean deletePaymentCard(Long cardNumber) {
+    public PaymentCard deletePaymentCard(Long cardNumber) {
         Optional<PaymentCard> checkCard = paymentCardRepository.findById(cardNumber);
         if (checkCard.isEmpty()) throw new NotFoundException("Card number not found");
         paymentCardRepository.deleteById(cardNumber);
-        return true;
+        return checkCard.get();
     }
 
     public PaymentCard getPaymentCard(Long cardNumber) {

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class RoomService {
     private final RoomRepository roomRepository;
 
-    public void addRoom(Room room){
-        roomRepository.save(room);
+    public Room addRoom(Room room){
+        return roomRepository.save(room);
     }
 }

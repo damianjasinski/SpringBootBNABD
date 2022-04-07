@@ -18,9 +18,9 @@ public class PaymentCardController {
     private final PaymentCardService paymentCardService;
 
     @PostMapping("/add")
-    public ResponseEntity<String> addPaymentCard(@Valid @RequestBody PaymentCard paymentCard) {
-        paymentCardService.addPaymentCard(paymentCard);
-        return new ResponseEntity<>("Payment card added succesfully", HttpStatus.OK);
+    public ResponseEntity<Map<String, PaymentCard>> addPaymentCard(@Valid @RequestBody PaymentCard paymentCard) {
+        PaymentCard paymentCard1 = paymentCardService.addPaymentCard(paymentCard);
+        return new ResponseEntity<>(Map.of("success", paymentCard1), HttpStatus.OK);
     }
 
     @GetMapping("/get/{cardNumber}")
