@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +27,12 @@ public class PaymentCardController {
     @GetMapping("/get/{cardNumber}")
     public ResponseEntity<PaymentCard> getPaymentCard(@PathVariable Long cardNumber) {
         PaymentCard pCard = paymentCardService.getPaymentCard(cardNumber);
+        return new ResponseEntity<>(pCard, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{cardNumber}")
+    public ResponseEntity<PaymentCard> deletePaymentCard(@PathVariable Long cardNumber) {
+        PaymentCard pCard = paymentCardService.deletePaymentCard(cardNumber);
         return new ResponseEntity<>(pCard, HttpStatus.OK);
     }
 
