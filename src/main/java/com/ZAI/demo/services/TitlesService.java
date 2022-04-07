@@ -7,6 +7,7 @@ import com.ZAI.demo.models.Titles;
 import com.ZAI.demo.repository.CategoryRepository;
 import com.ZAI.demo.repository.TitlesRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class TitlesService {
     private final TitlesRepository titlesRepository;

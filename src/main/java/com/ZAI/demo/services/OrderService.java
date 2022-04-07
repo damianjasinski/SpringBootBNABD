@@ -8,12 +8,12 @@ import com.ZAI.demo.repository.OrderRepository;
 import com.ZAI.demo.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-@AllArgsConstructor
-@Data
+@RequiredArgsConstructor
 @Service
 public class OrderService {
 

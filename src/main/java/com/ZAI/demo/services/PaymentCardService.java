@@ -5,11 +5,12 @@ import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.PaymentCard;
 import com.ZAI.demo.repository.PaymentCardRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class PaymentCardService {
     private final PaymentCardRepository paymentCardRepository;

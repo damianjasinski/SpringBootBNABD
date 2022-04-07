@@ -4,13 +4,14 @@ import com.ZAI.demo.models.Category;
 import com.ZAI.demo.models.Titles;
 import com.ZAI.demo.services.CategoryService;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Data
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/category")
 public class CategoryController {

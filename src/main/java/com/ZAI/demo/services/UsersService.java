@@ -4,6 +4,7 @@ import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.repository.UsersRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class UsersService {
     private final UsersRepository usersRepository;

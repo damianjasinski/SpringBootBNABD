@@ -4,6 +4,7 @@ import com.ZAI.demo.models.Seance;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.services.SeanceService;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@Data
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/seance")
 public class SeanceController {

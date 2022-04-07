@@ -4,6 +4,7 @@ import com.ZAI.demo.models.Users;
 import com.ZAI.demo.repository.UsersRepository;
 import com.ZAI.demo.services.UsersService;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@Data
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
 public class UsersController {
