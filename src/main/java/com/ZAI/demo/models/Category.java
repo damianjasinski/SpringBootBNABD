@@ -22,6 +22,4 @@ public class Category
     @Column(unique = true)
     String name;
 
-    @ManyToMany(mappedBy = "categorySet")
-    private Set<Titles> titlesSet;
 }
