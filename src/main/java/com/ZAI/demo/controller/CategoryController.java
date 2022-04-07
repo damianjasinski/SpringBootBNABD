@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @Data
 @RestController
-@RequestMapping("/api/controller")
+@RequestMapping("/api/category")
 public class CategoryController {
     public final CategoryService categoryService;
 
