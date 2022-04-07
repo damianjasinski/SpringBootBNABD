@@ -21,7 +21,7 @@ public class UsersController {
     private final UsersService usersService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Map<String,Users>> signupUser(@Valid @RequestBody Users users){
+    public ResponseEntity<Map<String,Users>> signupUser(@Valid @RequestBody Users users) {
         usersService.signupUser(users);
         return new ResponseEntity<>(Map.of("successfully signup",users), HttpStatus.OK);
     }
