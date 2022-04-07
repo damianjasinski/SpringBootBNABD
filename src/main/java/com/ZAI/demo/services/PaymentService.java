@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class PaymentService {
     private final PaymentRepository paymentRepository;
 
-    public boolean addPayment(Payment payment) {
+    public boolean addPayment(Payment payment) { //TODO czy karta wygasla
         payment.setCreatedAt(LocalDate.now());
         paymentRepository.save(payment);
         return true;

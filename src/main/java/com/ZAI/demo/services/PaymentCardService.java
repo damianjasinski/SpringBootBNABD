@@ -15,7 +15,7 @@ import java.util.Optional;
 public class PaymentCardService {
     private final PaymentCardRepository paymentCardRepository;
 
-    public PaymentCard addPaymentCard(PaymentCard paymentCard) {
+    public PaymentCard addPaymentCard(PaymentCard paymentCard) { //TODO czy jest wazna
         return paymentCardRepository.save(paymentCard);
     }
 

@@ -25,7 +25,7 @@ public class PaymentCard {
 
     @Basic
     @NotNull
-    LocalDate expDate;
+    LocalDate expDate; //TODO czy karta jest wazna?
 
     @NotNull
     @Pattern(regexp = "[0-9]{3}")

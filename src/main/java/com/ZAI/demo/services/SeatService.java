@@ -20,6 +20,8 @@ public class SeatService {
     private final OrderService orderService;
     private final SeatRepository seatRepository;
 
+    //TODO initialize seats after run app
+
     public void reserveSeat(Seat seat, Order order, long seanceId ) {
         Set<Order> orderSet = seat.getOrderSet();
         List<Order> isReserved = orderSet.stream()
