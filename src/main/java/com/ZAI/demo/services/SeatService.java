@@ -22,6 +22,8 @@ public class SeatService {
 
 
     //TODO return seat id that is reserved
+    //TODO initialize seats after run app
+
     public void reserveSeat(Seat seat, Order order, long seanceId ) {
         Set<Order> orderSet = seat.getOrderSet();
         List<Order> isReserved = orderSet.stream()

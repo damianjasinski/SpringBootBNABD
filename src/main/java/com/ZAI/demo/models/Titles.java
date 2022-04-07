@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Titles {
+public class Titles { //TODO add image path
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

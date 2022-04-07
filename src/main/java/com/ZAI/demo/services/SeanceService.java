@@ -34,6 +34,7 @@ public class SeanceService {
         }
     }
 
+    //TODO display current
     public List<Seance> displayAll() {return seanceRepository.findAll();}
 
 }
