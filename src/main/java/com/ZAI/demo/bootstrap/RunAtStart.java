@@ -26,7 +26,7 @@ public class RunAtStart {
                 "pankracy@gmail.com", "USER", null, null);
         usersRepository.save(user1);
 
-        PaymentCard paymentCard = new PaymentCard(123123123L, LocalDate.now(), "334", user1, null);
+        PaymentCard paymentCard = new PaymentCard("123123123", LocalDate.now(), "334", user1, null);
         paymentCardRepository.save(paymentCard);
 
 //        Department department1 = new Department("RND");
