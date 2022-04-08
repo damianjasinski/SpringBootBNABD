@@ -1,5 +1,6 @@
 package com.ZAI.demo.services;
 
+import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Payment;
 import com.ZAI.demo.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
@@ -13,8 +14,11 @@ import java.time.LocalDate;
 public class PaymentService {
     private final PaymentRepository paymentRepository;
 
-    public boolean addPayment(Payment payment) { //TODO czy karta wygasla
+    public boolean addPayment(Payment payment) {
         payment.setCreatedAt(LocalDate.now());
+        if (payment.getPaymentCard().getExpDate().isBefore(LocalDate.now())) {
+            throw new NotFoundException("Card is expired");
+        }
         paymentRepository.save(payment);
         return true;
     }
