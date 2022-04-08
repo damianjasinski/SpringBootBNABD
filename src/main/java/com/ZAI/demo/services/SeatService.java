@@ -7,6 +7,7 @@ import com.ZAI.demo.models.Seat;
 import com.ZAI.demo.repository.SeatRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +15,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
-@Data
+@RequiredArgsConstructor
 public class SeatService {
     private final OrderService orderService;
     private final SeatRepository seatRepository;
+
+
+    //TODO return seat id that is reserved
+    //TODO initialize seats after run app
 
     public void reserveSeat(Seat seat, Order order, long seanceId ) {
         Set<Order> orderSet = seat.getOrderSet();

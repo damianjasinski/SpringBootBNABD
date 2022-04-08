@@ -4,23 +4,25 @@ import com.ZAI.demo.models.Seance;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.services.SeanceService;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
-@Data
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/seance")
 public class SeanceController {
     private final SeanceService seanceService;
 
     @PostMapping("/add")
-    public ResponseEntity<String> addSeance(@Valid @RequestBody Seance seance){
-        seanceService.addSeance(seance);
-        return new ResponseEntity<>("Seance added succesfully", HttpStatus.OK);
+    public ResponseEntity<Map<String, Seance>> addSeance(@Valid @RequestBody Seance seance){
+        Seance seance1 = seanceService.addSeance(seance);
+        return new ResponseEntity<>(Map.of("Seance added succesfully", seance1), HttpStatus.OK);
     }
 
     @PostMapping("/modify")

@@ -40,6 +40,7 @@ public class Users {
     @Email
     String email;
 
+    //TODO User cant send request with other role
     String role = "USER";
 
 

@@ -8,12 +8,12 @@ import com.ZAI.demo.repository.OrderRepository;
 import com.ZAI.demo.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-@AllArgsConstructor
-@Data
+@RequiredArgsConstructor
 @Service
 public class OrderService {
 
@@ -22,14 +22,16 @@ public class OrderService {
 
 
     //TODO check if user id is equals to logged user id (user a cant order for user b)
+    //TODO seat reservation
     //check if payment is finalized
-    public void addNewOrder(Order order) {
+    public Order addNewOrder(Order order) {
         Payment payment = order.getPayment();
         if (payment.isFinalized()) {
             order.setCreatedAt(LocalDate.now());
             payment.setOrder(order);
             Order saved = orderRepository.save(order);
             paymentService.addPayment(payment);
+            return saved;
         }
         else throw new NotFoundException("You must finalize payment");
     }

@@ -4,6 +4,7 @@ import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.repository.UsersRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class UsersService {
     private final UsersRepository usersRepository;
@@ -23,10 +24,10 @@ public class UsersService {
         return usersRepository.findAll();
     }
 
-    public void signupUser(Users users){
+    public Users signupUser(Users users){
         Optional <Users> user = usersRepository.findByEmail(users.getEmail());
         if (user.isPresent()){throw new ResponseStatusException(HttpStatus.FORBIDDEN);}
-        usersRepository.save(users);
+        return usersRepository.save(users);
     }
 
     public boolean loginUser(String email, String password){

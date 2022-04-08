@@ -33,7 +33,7 @@ public class PaymentCard {
     String cvv;
 
 
-
+    //TODO constraint this foreign key
     @JsonBackReference
     @ManyToOne()
     @JoinColumn(nullable = false)

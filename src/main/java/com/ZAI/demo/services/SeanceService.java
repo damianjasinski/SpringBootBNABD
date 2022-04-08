@@ -17,8 +17,8 @@ import java.util.Optional;
 public class SeanceService {
     private final SeanceRepository seanceRepository;
 
-    public void addSeance(Seance seance){
-        seanceRepository.save(seance);
+    public Seance addSeance(Seance seance){
+        return seanceRepository.save(seance);
     }
 
     public Seance modifySeance(Seance seance){
@@ -34,6 +34,7 @@ public class SeanceService {
         }
     }
 
+    //TODO display current
     public List<Seance> displayAll() {return seanceRepository.findAll();}
 
 }
