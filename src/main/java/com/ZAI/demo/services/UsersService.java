@@ -27,6 +27,7 @@ public class UsersService {
     public Users signupUser(Users users){
         Optional <Users> user = usersRepository.findByEmail(users.getEmail());
         if (user.isPresent()){throw new ResponseStatusException(HttpStatus.FORBIDDEN);}
+        if (!"USER".equals(users.getRole())) {throw new ResponseStatusException(HttpStatus.FORBIDDEN);}
         return usersRepository.save(users);
     }
 
