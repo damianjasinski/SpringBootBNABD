@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -15,7 +16,10 @@ import java.util.Optional;
 public class PaymentCardService {
     private final PaymentCardRepository paymentCardRepository;
 
-    public PaymentCard addPaymentCard(PaymentCard paymentCard) { //TODO czy jest wazna
+    public PaymentCard addPaymentCard(PaymentCard paymentCard) {
+        if (paymentCard.getExpDate().isBefore(LocalDate.now())) {
+            throw new NotFoundException("Card is expired");
+        }
         return paymentCardRepository.save(paymentCard);
     }
 
