@@ -33,9 +33,15 @@ public class SeanceController {
     }
 
     @GetMapping("/displayAll")
-    public ResponseEntity<List<Seance>> displaySeances(){
+    public ResponseEntity<Map<String, List<Seance>>> displaySeances(){
         List<Seance> seance = seanceService.displayAll();
-        return new ResponseEntity<>(seance, HttpStatus.OK);
+        return new ResponseEntity<>(Map.of("seances", seance), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/current")
+    public ResponseEntity<Map<String, List<Seance>>> displayCurrentSeances() {
+        List<Seance> seance = seanceService.displayCurrent();
+        return new ResponseEntity<>(Map.of("seances", seance), HttpStatus.OK);
     }
 
 }
