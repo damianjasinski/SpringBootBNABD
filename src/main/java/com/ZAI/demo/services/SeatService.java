@@ -10,6 +10,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,5 +41,13 @@ public class SeatService {
         }
     }
 
+    @PostConstruct
+    public void init() {
+        List<Seat> seats = new ArrayList<>(100);
+        for (int i = 0; i < 100; i++) {
+            seats.add(new Seat(i, null));
+        }
+        seatRepository.saveAll(seats);
+    }
 
 }
