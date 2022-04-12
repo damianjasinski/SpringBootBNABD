@@ -22,11 +22,11 @@ public class RunAtStart {
     @PostConstruct
     public void initUser() {
 
-        Users user1 = new Users(null, "Pankracy", "123", LocalDate.now(),
+        Users user1 = new Users(null, "Pankracy", "$2a$12$tQdopFPcVGF5h5VQbf3fAuaZHCoP1s6pXNR6EhOARxU3Hr4xNWXVu", LocalDate.now(),
                 "pankracy@gmail.com", "USER", null, null);
         usersRepository.save(user1);
 
-        PaymentCard paymentCard = new PaymentCard("123123123", LocalDate.now(), "334", user1, null);
+        PaymentCard paymentCard = new PaymentCard("1234123412341234", LocalDate.now(), "334", user1, null);
         paymentCardRepository.save(paymentCard);
 
 //        Department department1 = new Department("RND");
