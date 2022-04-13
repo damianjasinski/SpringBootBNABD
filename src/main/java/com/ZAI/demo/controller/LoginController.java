@@ -36,27 +36,27 @@ public class LoginController {
 
     @PostMapping("/signin")
     public ResponseEntity<Map<String, String>> signinUser(@Valid @RequestBody Login login) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtil.generateJwtToken(authentication);
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt = jwtUtil.generateJwtToken(authentication);
 
-        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(Map.of("jwt", jwt), HttpStatus.OK);
-//        return ResponseEntity.ok(new JwtResponse(jwt,
-//                userDetails.getId(),
-//                userDetails.getUsername(),
-//                userDetails.getEmail(),
-//                roles));
+            MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+            List<String> roles = userDetails.getAuthorities().stream()
+                    .map(item -> item.getAuthority())
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(Map.of("message", "succesfully logged in", "jwt", jwt), HttpStatus.OK);
+        } catch (BadCredentialsException e) {
+            throw new UsernameNotFoundException("email not found " + login.getEmail());
+        }
+
     }
 
+
     @PostMapping("/signup")
-    public ResponseEntity<Map<String, Users>> signupUser(@Valid @RequestBody Users users) {
-        Users savedUser = usersService.signupUser(users);
-        return new ResponseEntity<>(Map.of("successfully signup", savedUser), HttpStatus.OK);
+    public ResponseEntity<Map<String, String>> signupUser(@Valid @RequestBody Login login) {
+        return new ResponseEntity<>(Map.of("successfully signup", login.getEmail()), HttpStatus.OK);
     }
 
 
