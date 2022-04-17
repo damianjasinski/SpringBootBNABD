@@ -26,12 +26,12 @@ public class UsersController {
         return new ResponseEntity<>(Map.of("successfully signup", savedUser), HttpStatus.OK);
     }
 
-    @GetMapping("/get_users")
+    @GetMapping("/get/all")
     public List<Users> getUsers() {
         return usersService.getAll();
     }
 
-    @GetMapping("/get_user/{id}")
+    @GetMapping("/get/{id}")
     public Users getUser(@PathVariable long id)
     {
         return usersService.getById(id);
