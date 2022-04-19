@@ -1,6 +1,15 @@
 FROM maven:3.5.4-jdk-11
 
 COPY . /project
+
 RUN  cd /project && mvn package
 
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-jar","/project/target/demo-0.0.1-SNAPSHOT.jar"]
+
+#FROM v1:latest
+#
+#COPY . /project
+#
+#RUN  cd /project && mvn package
+#
+#ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-jar","/project/target/demo-0.0.1-SNAPSHOT.jar"]
