@@ -68,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // Our public endpoints
                 .antMatchers("/api/login/**").permitAll()
-                .antMatchers("api/seance/get/current").permitAll()
+                .antMatchers("/api/seance/get/current").permitAll()
                 // Our private endpoints
                 .antMatchers("/api/category/add").hasAuthority("ADMIN")
                 .antMatchers("/api/category/remove/**").hasAuthority("ADMIN")
