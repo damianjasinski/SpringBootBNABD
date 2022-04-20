@@ -77,7 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/seance/add").hasAuthority("ADMIN")
                 .antMatchers("/api/seance/modify").hasAuthority("ADMIN")
                 .antMatchers("/api/user/get/all").hasAuthority("ADMIN")
-                .antMatchers("api/user/get/me").hasAuthority("USER")
+                .antMatchers("/api/user/get/**").hasAuthority("ADMIN")
                 .antMatchers("/api/titles/add").hasAuthority("ADMIN")
                 .antMatchers("/api/titles/remove").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
