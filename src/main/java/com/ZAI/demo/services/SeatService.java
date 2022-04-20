@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class SeatService {
-    private final OrderService orderService;
     private final SeatRepository seatRepository;
 
 
