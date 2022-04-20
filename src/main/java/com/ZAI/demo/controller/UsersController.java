@@ -40,7 +40,8 @@ public class UsersController {
     }
 
     @GetMapping("/get/me")
-    public MyUserDetails getCurrentUser() {
-        return (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public Users getCurrentUser() {
+        MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return usersService.getById(user.getId());
     }
 }
