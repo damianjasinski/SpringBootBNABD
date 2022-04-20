@@ -21,7 +21,7 @@ import java.util.Map;
 public class OrderController {
     private final OrderService orderService;
 
-    @PostMapping("/put")
+    @PostMapping("/add")
     public ResponseEntity<Map<String, Order>> addOrder(@Valid @RequestBody Order order) {
         Order order1 = orderService.addNewOrder(order);
         return new ResponseEntity<>(Map.of("success", order1), HttpStatus.OK);

@@ -32,7 +32,7 @@ public class SeanceController {
 
     }
 
-    @GetMapping("/displayAll")
+    @GetMapping("/get/all")
     public ResponseEntity<Map<String, List<Seance>>> displaySeances(){
         List<Seance> seance = seanceService.displayAll();
         return new ResponseEntity<>(Map.of("seances", seance), HttpStatus.OK);

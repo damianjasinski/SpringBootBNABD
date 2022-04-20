@@ -2,12 +2,14 @@ package com.ZAI.demo.controller;
 
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.repository.UsersRepository;
+import com.ZAI.demo.security.MyUserDetails;
 import com.ZAI.demo.services.UsersService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,7 +18,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UsersController {
     private final UsersService usersService;
 
@@ -26,14 +28,19 @@ public class UsersController {
         return new ResponseEntity<>(Map.of("successfully signup", savedUser), HttpStatus.OK);
     }
 
-    @GetMapping("/get_users")
+    @GetMapping("/get/all")
     public List<Users> getUsers() {
         return usersService.getAll();
     }
 
-    @GetMapping("/get_user/{id}")
+    @GetMapping("/get/{id}")
     public Users getUser(@PathVariable long id)
     {
         return usersService.getById(id);
+    }
+
+    @GetMapping("/get/me")
+    public MyUserDetails getCurrentUser() {
+        return (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }
