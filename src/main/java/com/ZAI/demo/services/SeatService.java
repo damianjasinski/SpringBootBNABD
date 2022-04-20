@@ -24,11 +24,9 @@ public class SeatService {
     private final SeatRepository seatRepository;
 
 
-    //TODO return seat id that is reserved
-    //TODO initialize seats after run app
-
-    public void reserveSeat(Seat seat, Order order, long seanceId ) {
+    public void reserveSeat(Seat seat, Order order) {
         Set<Order> orderSet = seat.getOrderSet();
+        long seanceId = order.getSeance().getId();
         List<Order> isReserved = orderSet.stream()
                 .filter((x) -> x.getSeance().getId() == seanceId)
                 .collect(Collectors.toList());

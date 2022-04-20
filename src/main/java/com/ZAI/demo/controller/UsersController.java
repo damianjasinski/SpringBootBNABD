@@ -1,8 +1,12 @@
 package com.ZAI.demo.controller;
 
+import com.ZAI.demo.models.Order;
+import com.ZAI.demo.models.Payment;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.repository.UsersRepository;
 import com.ZAI.demo.security.MyUserDetails;
+import com.ZAI.demo.services.OrderService;
+import com.ZAI.demo.services.PaymentService;
 import com.ZAI.demo.services.UsersService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +19,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/user")
 public class UsersController {
     private final UsersService usersService;
+    private final PaymentService paymentService;
+    private final OrderService orderService;
 
     @PostMapping("/signup")
     public ResponseEntity<Map<String,Users>> signupUser(@Valid @RequestBody Users users) {
@@ -41,7 +48,16 @@ public class UsersController {
 
     @GetMapping("/get/me")
     public Users getCurrentUser() {
-        MyUserDetails user = (MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return usersService.getById(user.getId());
+        return usersService.getById(((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+    }
+
+    @GetMapping("/get/payments")
+    public List<Payment> getUserPayments() {
+        return paymentService.getPayments(((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+    }
+
+    @GetMapping("/get/orders")
+    public Set<Order> getUserOrders() {
+        return orderService.getOrders(((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
 }

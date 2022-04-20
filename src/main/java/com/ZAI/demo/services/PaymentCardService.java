@@ -21,18 +21,19 @@ public class PaymentCardService {
     private final PaymentCardRepository paymentCardRepository;
 
     public PaymentCard addPaymentCard(PaymentCard paymentCard) {
-        if (paymentCard.getExpDate().isBefore(LocalDate.now())) {
-            throw new NotFoundException("Card is expired");
+        if ( ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() == paymentCard.getUsers().getId()) {
+            if (paymentCard.getExpDate().isBefore(LocalDate.now())) {
+                throw new NotFoundException("Card is expired");
+            }
+            return paymentCardRepository.save(paymentCard);
         }
-        return paymentCardRepository.save(paymentCard);
+        throw new NotFoundException("You can't add card for another user!");
     }
 
     public PaymentCard deletePaymentCard(Long cardNumber) {
-        MyUserDetails user = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Long currentUserId = user.getId();
         Optional<PaymentCard> checkCard = paymentCardRepository.findById(cardNumber);
         if (checkCard.isPresent()) {
-            if (checkCard.get().getUsers().getId() == currentUserId) {
+            if (checkCard.get().getUsers().getId() == ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ) {
                 paymentCardRepository.deleteById(cardNumber);
                 return checkCard.get();
             }
