@@ -14,13 +14,16 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Titles { //TODO add image path
+public class Titles {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Transient
     private List<Long> categoriesId;
+
+    String imUrl;
 
     @NotBlank
     String name;
