@@ -24,16 +24,11 @@ import java.util.Set;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/user")
-public class UsersController {
+public class UsersController implements SecuredController {
     private final UsersService usersService;
     private final PaymentService paymentService;
     private final OrderService orderService;
 
-    @PostMapping("/signup")
-    public ResponseEntity<Map<String,Users>> signupUser(@Valid @RequestBody Users users) {
-        Users savedUser = usersService.signupUser(users);
-        return new ResponseEntity<>(Map.of("successfully signup", savedUser), HttpStatus.OK);
-    }
 
     @GetMapping("/get/all")
     public List<Users> getUsers() {
