@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/category")
-public class CategoryController {
+public class CategoryController implements SecuredController {
     public final CategoryService categoryService;
 
     @PostMapping("/add")

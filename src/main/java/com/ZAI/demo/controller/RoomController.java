@@ -17,7 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/room")
-public class RoomController{
+public class RoomController implements SecuredController {
     private final RoomService roomService;
 
     @PostMapping("/add")
