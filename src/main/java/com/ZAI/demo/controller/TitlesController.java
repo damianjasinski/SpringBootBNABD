@@ -14,7 +14,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/titles")
-public class TitlesController {
+public class TitlesController implements SecuredController {
     private final TitlesService titlesService;
 
     @PostMapping("/add")

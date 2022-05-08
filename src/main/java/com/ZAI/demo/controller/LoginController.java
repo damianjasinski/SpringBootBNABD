@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/login")
-public class LoginController {
+public class LoginController implements SecuredController {
 
     private final UsersService usersService;
     private final PasswordEncoder pwEncoder;

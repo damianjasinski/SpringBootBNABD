@@ -14,7 +14,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/payment_card")
-public class PaymentCardController {
+public class PaymentCardController implements SecuredController {
 
     private final PaymentCardService paymentCardService;
 

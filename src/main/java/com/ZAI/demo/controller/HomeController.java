@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @EqualsAndHashCode
-public class HomeController {
+public class HomeController implements SecuredController {
 
     private final UsersRepository usersRepository;
 
