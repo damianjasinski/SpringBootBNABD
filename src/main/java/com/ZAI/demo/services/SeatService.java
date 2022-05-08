@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,9 +27,9 @@ public class SeatService {
     public void reserveSeat(Seat seat, Order order) {
         Set<Order> orderSet = seat.getOrderSet();
         long seanceId = order.getSeance().getId();
-        List<Order> isReserved = orderSet.stream()
+        Optional<Order> isReserved = orderSet.stream()
                 .filter((x) -> x.getSeance().getId() == seanceId)
-                .collect(Collectors.toList());
+                .findAny();
         if (isReserved.isEmpty()) {
             orderSet.add(order);
             seat.setOrderSet(orderSet);
