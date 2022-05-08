@@ -18,6 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,6 +35,7 @@ public class UsersService {
     private final UsersRepository usersRepository;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
 
     public List<Users> getAll() {
         return usersRepository.findAll();
@@ -63,8 +65,10 @@ public class UsersService {
         Users userToSave = Users.builder().email(
                         register.getEmail()).
                 userFirstName(register.getFirstname()).
-                userSurname(register.getSurname()).
-                password(register.getPassword()).build();
+                userSurname(register.getSurname())
+                .role("USER")
+                .password(passwordEncoder.encode(register.getPassword()))
+                .build();
         usersRepository.save(userToSave);
         return true;
 
