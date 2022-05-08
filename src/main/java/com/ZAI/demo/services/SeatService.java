@@ -3,7 +3,9 @@ package com.ZAI.demo.services;
 
 import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Order;
+import com.ZAI.demo.models.Seance;
 import com.ZAI.demo.models.Seat;
+import com.ZAI.demo.repository.OrderRepository;
 import com.ZAI.demo.repository.SeatRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SeatService {
     private final SeatRepository seatRepository;
+    private final OrderRepository orderRepository;
 
 
     public void reserveSeat(Seat seat, Order order) {
@@ -37,6 +40,22 @@ public class SeatService {
         } else {
             throw new NotFoundException("Seat is already reserverd on this seance");
         }
+    }
+
+    public List <Seat> returnReservedSeats(Seance seance){
+        long seanceId = seance.getId();
+
+        List<Seat> seats = seatRepository.findAll();
+        List<Seat> reservedSeats = new ArrayList<>();
+
+        for (Seat seat : seats){
+            Optional<Order> isReserved = seat.getOrderSet().stream().filter((x) -> x.getSeance().getId() == seanceId)
+                    .findAny();
+            if(isReserved.isPresent()){
+                reservedSeats.add(seat);
+            }
+        }
+        return reservedSeats;
     }
 
     @PostConstruct
