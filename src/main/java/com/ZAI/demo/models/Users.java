@@ -13,7 +13,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.Set;
-
+@Builder
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,8 +26,11 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Username cannot be empty!")
-    String username;
+    @NotBlank(message = "Firstname cannot be empty!")
+    String userFirstName;
+
+    @NotBlank(message = "Surname cannot be empty!")
+    String userSurname;
 
     @NotBlank(message = "Password cannot be empty!")
     String password;

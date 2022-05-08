@@ -2,6 +2,7 @@ package com.ZAI.demo.controller;
 
 
 import com.ZAI.demo.models.Login;
+import com.ZAI.demo.models.Register;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.security.JwtUtil;
 import com.ZAI.demo.security.MyUserDetails;
@@ -33,33 +34,19 @@ import java.util.stream.Collectors;
 public class LoginController implements SecuredController {
 
     private final UsersService usersService;
-    private final PasswordEncoder pwEncoder;
-    private final JwtUtil jwtUtil;
-    private final AuthenticationManager authenticationManager;
 
     @PostMapping("/signin")
     public ResponseEntity<Map<String, String>> signinUser(@Valid @RequestBody Login login) {
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            String jwt = jwtUtil.generateJwtToken(authentication);
-
-            MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
-            List<String> roles = userDetails.getAuthorities().stream()
-                    .map(item -> item.getAuthority())
-                    .collect(Collectors.toList());
-            return new ResponseEntity<>(Map.of("message", "succesfully logged in", "jwt", jwt), HttpStatus.OK);
-        } catch (BadCredentialsException e) {
-            throw new UsernameNotFoundException("email not found " + login.getEmail());
-        }
-
+        String jwt = usersService.loginUser(login);
+        return new ResponseEntity<>(Map.of("message", "succesfully logged in", "jwt", jwt), HttpStatus.OK);
     }
 
 
     @PostMapping("/signup")
-    public ResponseEntity<Map<String, String>> signupUser(@Valid @RequestBody Login login) {
-        return new ResponseEntity<>(Map.of("successfully signup", login.getEmail()), HttpStatus.OK);
+    public ResponseEntity<String> signupUser(@Valid @RequestBody Register register) {
+
+        usersService.registerUser(register);
+        return new ResponseEntity<>("Succesfully registered", HttpStatus.OK);
     }
 
 

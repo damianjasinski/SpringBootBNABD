@@ -20,13 +20,13 @@ public class RunAtStart {
     @PostConstruct
     public void initUser() {
 
-        Users user1 = new Users(null, "Pankracy", "$2a$12$tQdopFPcVGF5h5VQbf3fAuaZHCoP1s6pXNR6EhOARxU3Hr4xNWXVu", LocalDate.now(),
+        Users user1 = new Users(null,"Jan", "Pankracy", "$2a$12$tQdopFPcVGF5h5VQbf3fAuaZHCoP1s6pXNR6EhOARxU3Hr4xNWXVu", LocalDate.now(),
                 "pankracy@gmail.com", "USER", null, null);
         usersRepository.save(user1);
-        Users user2 = new Users(null, "Pankraxcy", "$2a$12$tQdopFPcVGF5h5VQbf3fAuaZHCoP1s6pXNR6EhOARxU3Hr4xNWXVu", LocalDate.now(),
+        Users user2 = new Users(null,"Jan",  "Pankraxcy", "$2a$12$tQdopFPcVGF5h5VQbf3fAuaZHCoP1s6pXNR6EhOARxU3Hr4xNWXVu", LocalDate.now(),
                 "pankrdacy@gmail.com", "USER", null, null);
         usersRepository.save(user2);
-        Users user3 = new Users(null, "panek", "$2a$12$tQdopFPcVGF5h5VQbf3fAuaZHCoP1s6pXNR6EhOARxU3Hr4xNWXVu", LocalDate.now(),
+        Users user3 = new Users(null,"Jan",  "panek", "$2a$12$tQdopFPcVGF5h5VQbf3fAuaZHCoP1s6pXNR6EhOARxU3Hr4xNWXVu", LocalDate.now(),
                 "panek@gmail.com", "ADMIN", null, null);
         usersRepository.save(user3);
 
