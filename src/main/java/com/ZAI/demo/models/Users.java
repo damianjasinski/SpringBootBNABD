@@ -11,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.Set;
 @Builder
@@ -32,6 +33,7 @@ public class Users {
     @NotBlank(message = "Surname cannot be empty!")
     String userSurname;
 
+    @Pattern(regexp = "^.{8,}$")
     @NotBlank(message = "Password cannot be empty!")
     String password;
 
