@@ -29,16 +29,13 @@ public class OrderService {
             Payment payment = order.getPayment();
             if (payment.isFinalized()) {
                 //reserve each seat
-                for (Seat seat : order.getSeatSet()) {
-                    seatService.reserveSeat(seat, order);
-                }
+                seatService.reserveSeat(order.getSeat(), order);
                 order.setCreatedAt(LocalDate.now());
-                payment.setOrder(order);
                 Order saved = orderRepository.save(order);
+                payment.setOrder(saved);
                 paymentService.addPayment(payment);
                 return saved;
-            }
-            else throw new NotFoundException("You must finalize payment");
+            } else throw new NotFoundException("You must finalize payment");
         }
         throw new NotFoundException("You can't order for other user!");
     }

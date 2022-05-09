@@ -1,13 +1,15 @@
 package com.ZAI.demo.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -17,11 +19,8 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "seat_order",
-            joinColumns = @JoinColumn(name = "seat_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id"))
+    @JsonManagedReference(value = "seatReference")
+    @OneToMany(mappedBy = "seat")
     private Set<Order> orderSet;
 
 }

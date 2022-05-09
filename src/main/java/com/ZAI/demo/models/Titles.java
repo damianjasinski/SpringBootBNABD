@@ -1,8 +1,6 @@
 package com.ZAI.demo.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,7 +8,8 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

@@ -25,7 +25,7 @@ public class PaymentCardController implements SecuredController {
     }
 
     @GetMapping("/get/{cardNumber}")
-    public ResponseEntity<PaymentCard> getPaymentCard(@PathVariable Long cardNumber) {
+    public ResponseEntity<PaymentCard> getPaymentCard(@PathVariable String cardNumber) {
         PaymentCard pCard = paymentCardService.getPaymentCard(cardNumber);
         return new ResponseEntity<>(pCard, HttpStatus.OK);
     }

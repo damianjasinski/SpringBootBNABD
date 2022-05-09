@@ -41,8 +41,9 @@ public class PaymentCardService {
         throw new NotFoundException("Card not found");
     }
 
-    public PaymentCard getPaymentCard(Long cardNumber) {
-        return paymentCardRepository.findById(cardNumber).orElseThrow(() -> new NotFoundException("Card number not found"));
+    public PaymentCard getPaymentCard(String cardNumber) {
+        System.out.println("xd");
+        return paymentCardRepository.getByCardNumber(cardNumber).orElseThrow(() -> new NotFoundException("Card number not found"));
     }
 
 }

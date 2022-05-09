@@ -1,9 +1,9 @@
 package com.ZAI.demo.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,7 +11,8 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Payment {
@@ -29,14 +30,13 @@ public class Payment {
     @NotNull
     boolean finalized;
 
+    @JsonBackReference(value = "paymentCardReference")
     @ManyToOne()
     @JoinColumn(nullable = false)
     private PaymentCard paymentCard;
 
-//    @ManyToOne()
-//    @JoinColumn(nullable = false)
-//    private Users users;
 
+    @JsonManagedReference(value = "paymentReference")
     @OneToOne()
     private Order order;
 

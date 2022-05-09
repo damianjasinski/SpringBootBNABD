@@ -1,8 +1,10 @@
 package com.ZAI.demo.bootstrap;
 
 import com.ZAI.demo.models.PaymentCard;
+import com.ZAI.demo.models.Seance;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.repository.PaymentCardRepository;
+import com.ZAI.demo.repository.SeanceRepository;
 import com.ZAI.demo.repository.UsersRepository;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,7 @@ public class RunAtStart {
 
     private final PaymentCardRepository paymentCardRepository;
     private final UsersRepository usersRepository;
+    private final SeanceRepository seanceRepository;
 
     @PostConstruct
     public void initUser() {
@@ -33,6 +36,10 @@ public class RunAtStart {
         PaymentCard paymentCard = new PaymentCard("1234123412341234", LocalDate.now(), "334", user1, null);
         paymentCardRepository.save(paymentCard);
 
+        Seance seance = new Seance(1L,LocalDate.now(), 15, null, null, null);
+        seanceRepository.save(seance);
+//        "advertisementTime" : 15,
+//                "seanceDate" : "2022-04-15"
 //        Department department1 = new Department("RND");
 //        departmentRepository.save(department1);
 //
