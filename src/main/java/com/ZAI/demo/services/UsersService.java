@@ -42,12 +42,12 @@ public class UsersService {
     }
 
 
-    public String loginUser(Login login) {
+    public Map<String, String> loginUser(Login login) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            return jwtUtil.generateJwtToken(authentication);
+            return Map.of("jwt" ,jwtUtil.generateJwtToken(authentication), "role", authentication.getAuthorities().toString());
         } catch (BadCredentialsException e) {
             throw new UsernameNotFoundException("email not found " + login.getEmail());
         }

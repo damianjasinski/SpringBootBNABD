@@ -37,8 +37,10 @@ public class LoginController implements SecuredController {
 
     @PostMapping("/signin")
     public ResponseEntity<Map<String, String>> signinUser(@Valid @RequestBody Login login) {
-        String jwt = usersService.loginUser(login);
-        return new ResponseEntity<>(Map.of("message", "succesfully logged in", "jwt", jwt), HttpStatus.OK);
+        Map<String, String> response = usersService.loginUser(login);
+        return new ResponseEntity<>(Map.of("message", "succesfully logged in",
+                "jwt", response.get("jwt"),
+                "role", response.get("role")), HttpStatus.OK);
     }
 
 
