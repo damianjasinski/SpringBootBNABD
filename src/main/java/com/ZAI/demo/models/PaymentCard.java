@@ -33,15 +33,10 @@ public class PaymentCard {
     @Pattern(regexp = "[0-9]{3}")
     String cvv;
 
-
-    @JsonBackReference(value = "paymentCardSetUserReference")
     @ManyToOne()
     @JoinColumn(nullable = false)
     public Users users;
 
-
-
-    @JsonManagedReference(value = "paymentCardReference")
     @OneToMany(mappedBy = "paymentCard", fetch = FetchType.EAGER)
     private Set<Payment> paymentSet;
 
