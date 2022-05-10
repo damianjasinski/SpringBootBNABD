@@ -72,6 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Our public endpoints
                 .antMatchers("/api/login/**").permitAll()
                 .antMatchers("/api/seance/get/current").permitAll()
+                .antMatchers("/api/seance/get/all").permitAll()
                 .antMatchers("/v3/api-docs/**").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
@@ -81,10 +82,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/category/remove/**").hasAuthority("ADMIN")
                 .antMatchers("/api/category/add").hasAuthority("ADMIN")
                 .antMatchers("/api/room/add").hasAuthority("ADMIN")
+                .antMatchers("/api/room/get/all").hasAuthority("ADMIN")
                 .antMatchers("/api/seance/add").hasAuthority("ADMIN")
                 .antMatchers("/api/seance/modify").hasAuthority("ADMIN")
                 .antMatchers("/api/user/get/all").hasAuthority("ADMIN")
-                .antMatchers("/api/user/get/**").hasAuthority("ADMIN")
                 .antMatchers("/api/titles/add").hasAuthority("ADMIN")
                 .antMatchers("/api/titles/remove").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
