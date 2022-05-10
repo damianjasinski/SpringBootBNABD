@@ -3,19 +3,13 @@ package com.ZAI.demo.services;
 
 import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Order;
-import com.ZAI.demo.models.Seance;
 import com.ZAI.demo.models.Seat;
 import com.ZAI.demo.repository.OrderRepository;
 import com.ZAI.demo.repository.SeatRepository;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,20 +37,18 @@ public class SeatService {
         }
     }
 
-    public List<Seat> returnReservedSeats(Seance seance) {
-        long seanceId = seance.getId();
+    public List<Seat> getAvailableSeats(long seanceId) {
 
         List<Seat> seats = seatRepository.findAll();
-        List<Seat> reservedSeats = new ArrayList<>();
-
+        List<Seat> availableSeats = new ArrayList<>();
         for (Seat seat : seats) {
             Optional<Order> isReserved = seat.getOrderSet().stream().filter((x) -> x.getSeance().getId() == seanceId)
                     .findAny();
-            if (isReserved.isPresent()) {
-                reservedSeats.add(seat);
+            if (isReserved.isEmpty()) {
+                availableSeats.add(seat);
             }
         }
-        return reservedSeats;
+        return availableSeats;
     }
 
 //    @PostConstruct
