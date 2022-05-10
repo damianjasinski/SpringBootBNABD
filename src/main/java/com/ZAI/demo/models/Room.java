@@ -25,6 +25,6 @@ public class Room {
 
     @NotNull int capacity;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Seance> seanceSet;
 }
