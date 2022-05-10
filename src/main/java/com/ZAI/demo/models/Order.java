@@ -1,9 +1,7 @@
 package com.ZAI.demo.models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,6 +14,9 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "orders")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Order implements Serializable {
 
     @Id
@@ -23,18 +24,16 @@ public class Order implements Serializable {
     private long id;
     LocalDate createdAt;
 
-    @JsonBackReference(value = "userOrderSet")
     @ManyToOne()
     private Users users;
 
     @ManyToOne()
-    @JsonBackReference(value = "seatReference")
     private Seat seat;
 
     @ManyToOne()
     private Seance seance;
 
-    @JsonBackReference(value = "paymentReference")
+
     @OneToOne(mappedBy = "order", cascade=CascadeType.ALL)
     private Payment payment;
 }

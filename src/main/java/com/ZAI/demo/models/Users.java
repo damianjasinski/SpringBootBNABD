@@ -21,6 +21,9 @@ import java.util.Set;
 @Setter
 @Getter
 @EqualsAndHashCode(exclude = "paymentCardSet")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Users {
 
     @Id
@@ -47,11 +50,9 @@ public class Users {
 
     String role = "USER";
 
-    @JsonManagedReference(value = "userOrderSet")
     @OneToMany(mappedBy = "users")
     private Set<Order> orderSet;
 
-    @JsonManagedReference(value = "paymentCardSetUserReference")
     @OneToMany(mappedBy = "users")
     public Set<PaymentCard> paymentCardSet;
 

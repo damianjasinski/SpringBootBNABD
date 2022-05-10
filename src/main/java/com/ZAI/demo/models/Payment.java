@@ -2,7 +2,9 @@ package com.ZAI.demo.models;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,6 +17,9 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Payment {
 
     @Id
@@ -30,13 +35,10 @@ public class Payment {
     @NotNull
     boolean finalized;
 
-    @JsonBackReference(value = "paymentCardReference")
     @ManyToOne()
     @JoinColumn(nullable = false)
     private PaymentCard paymentCard;
 
-
-    @JsonManagedReference(value = "paymentReference")
     @OneToOne()
     private Order order;
 
