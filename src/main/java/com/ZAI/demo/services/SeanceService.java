@@ -3,6 +3,7 @@ package com.ZAI.demo.services;
 import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Seance;
 import com.ZAI.demo.models.Users;
+import com.ZAI.demo.repository.RoomRepository;
 import com.ZAI.demo.repository.SeanceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,15 +19,16 @@ import java.util.stream.Collectors;
 @Service
 public class SeanceService {
     private final SeanceRepository seanceRepository;
+    private final RoomService roomService;
 
-    public Seance addSeance(Seance seance){
+    public Seance addSeance(Seance seance) {
+        roomService.addSeanceToRoom(seance);
         return seanceRepository.save(seance);
     }
 
     public Seance modifySeance(Seance seance){
         Optional <Seance> seances = seanceRepository.findById(seance.getId());
         if(seances.isPresent()){
-            seances.get().setRoom(seance.getRoom());
             seances.get().setAdvertisementTime(seance.getAdvertisementTime());
             seances.get().setTitles(seance.getTitles());
             seances.get().setSeanceDate(seance.getSeanceDate());
