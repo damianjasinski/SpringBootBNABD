@@ -27,7 +27,6 @@ public class RoomService {
             Room room1 = room.get();
             Set<Seance> seanceSet = room1.getSeanceSet();
             seanceSet.add(seance);
-            roomRepository.save(room1);
         }
     }
 }
