@@ -1,7 +1,6 @@
 package com.ZAI.demo.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,6 +14,10 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Seance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,10 +31,9 @@ public class Seance {
     int advertisementTime;
 
     @OneToMany(mappedBy = "seance")
-    private Set<Order> seanceSet;
+    private Set<Order> orderSet;
 
-    @ManyToOne()
-    private Room room;
+    private long roomId;
 
     @ManyToOne()
     private Titles titles;
