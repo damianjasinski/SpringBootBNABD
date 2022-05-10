@@ -2,6 +2,7 @@ package com.ZAI.demo.controller;
 
 import com.ZAI.demo.models.Room;
 import com.ZAI.demo.models.Users;
+import com.ZAI.demo.repository.RoomRepository;
 import com.ZAI.demo.services.RoomService;
 import com.ZAI.demo.services.UsersService;
 import lombok.Data;
@@ -19,11 +20,17 @@ import java.util.Map;
 @RequestMapping("/api/room")
 public class RoomController implements SecuredController {
     private final RoomService roomService;
+    private final RoomRepository roomRepository;
 
     @PostMapping("/add")
     public ResponseEntity<Map<String, Room>> addRoom(@Valid @RequestBody Room room){
         Room room1 = roomService.addRoom(room);
         return new ResponseEntity<>(Map.of("Room added succesfully", room1), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/all")
+    public List<Room> getRooms() {
+        return roomRepository.findAll();
     }
 
 }
