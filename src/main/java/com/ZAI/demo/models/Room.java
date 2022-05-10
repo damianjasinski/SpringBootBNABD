@@ -1,5 +1,9 @@
 package com.ZAI.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,16 +14,17 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Room {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
-    int capacity;
+    @NotNull int capacity;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Seance> seanceSet;
 }
