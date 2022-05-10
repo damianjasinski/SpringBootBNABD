@@ -25,7 +25,8 @@ public class SeatService {
 
 
     public void reserveSeat(Seat seat, Order order) {
-        Set<Order> orderSet = seat.getOrderSet();
+        Seat orderSeat = seatRepository.getById(order.getSeat().getId());
+        Set<Order> orderSet = orderSeat.getOrderSet();
         long seanceId = order.getSeance().getId();
         if (orderSet == null) {
             orderSet = new HashSet<>();
@@ -42,30 +43,29 @@ public class SeatService {
         }
     }
 
-    public List <Seat> returnReservedSeats(Seance seance){
+    public List<Seat> returnReservedSeats(Seance seance) {
         long seanceId = seance.getId();
 
         List<Seat> seats = seatRepository.findAll();
         List<Seat> reservedSeats = new ArrayList<>();
 
-        for (Seat seat : seats){
+        for (Seat seat : seats) {
             Optional<Order> isReserved = seat.getOrderSet().stream().filter((x) -> x.getSeance().getId() == seanceId)
                     .findAny();
-            if(isReserved.isPresent()){
+            if (isReserved.isPresent()) {
                 reservedSeats.add(seat);
             }
         }
         return reservedSeats;
     }
 
-    @PostConstruct
-    public void init() {
-        seatRepository.save(new Seat(1, new HashSet<>()));
+//    @PostConstruct
+//    public void init() {
 //        List<Seat> seats = new ArrayList<>(100);
 //        for (int i = 0; i < 100; i++) {
 //            seats.add(new Seat(i, new HashSet<>()));
 //        }
 //        seatRepository.saveAll(seats);
-    }
+//    }
 
 }
