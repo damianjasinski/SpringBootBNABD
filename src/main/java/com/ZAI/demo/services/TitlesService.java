@@ -3,6 +3,8 @@ package com.ZAI.demo.services;
 
 import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Category;
+import com.ZAI.demo.models.Order;
+import com.ZAI.demo.models.Seat;
 import com.ZAI.demo.models.Titles;
 import com.ZAI.demo.repository.CategoryRepository;
 import com.ZAI.demo.repository.TitlesRepository;
@@ -10,10 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -23,11 +22,18 @@ public class TitlesService {
 
     public Titles addTitles(Titles titles){
         List<Category> categories = categoryRepository.findAllById(titles.getCategoriesId());
-
+        if (categories.size() == 0) {
+            throw new NotFoundException("Category not found");
+        }
         if (categories.size() != titles.getCategoriesId().size()){
             throw new NotFoundException("Category not found");
         }else{
-            titles.setCategorySet(Set.copyOf(categories));
+            Set<Category> categorySet = titles.getCategorySet();
+            if (categorySet == null) {
+                categorySet = new HashSet<>();
+            }
+            categorySet.addAll(categories);
+            titles.setCategorySet(categorySet);
             return titlesRepository.save(titles);
         }
 

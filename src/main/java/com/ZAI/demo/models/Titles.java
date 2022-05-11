@@ -1,5 +1,6 @@
 package com.ZAI.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class Titles {
     @Transient
     private List<Long> categoriesId;
 
-    String imUrl;
+    String imUrl = "https://image.posterlounge.pl/images/l/1899145.jpg";
 
     @NotBlank
     String name;
@@ -30,6 +31,7 @@ public class Titles {
     @NotNull
     int length;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "titles")
     private Set<Seance> seanceSet;
 
