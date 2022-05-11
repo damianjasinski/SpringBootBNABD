@@ -30,8 +30,8 @@ public class Seance {
     @NotNull
     int advertisementTime;
 
-    @OneToMany(mappedBy = "seance")
-    private Set<Order> orderSet;
+//    @OneToMany(mappedBy = "seance")
+//    private Set<Order> orderSet;
 
     private long roomId;
 

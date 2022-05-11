@@ -16,7 +16,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/seance")
-public class SeanceController  {
+public class SeanceController implements SecuredController {
     private final SeanceService seanceService;
 
     @PostMapping("/add")
