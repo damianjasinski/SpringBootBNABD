@@ -33,7 +33,7 @@ public class Seance {
 //    @OneToMany(mappedBy = "seance")
 //    private Set<Order> orderSet;
 
-    private long roomId;
+    private Long roomId;
 
     @ManyToOne()
     private Titles titles;

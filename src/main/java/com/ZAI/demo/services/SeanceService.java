@@ -41,7 +41,7 @@ public class SeanceService {
     public List<Seance> displayCurrent() {
         return seanceRepository.findAll()
                 .stream()
-                .filter((x) -> x.getSeanceDate().isAfter(LocalDate.now()))
+                .filter((x) -> x.getSeanceDate().isAfter(LocalDate.now().minusDays(1)))
                 .collect(Collectors.toList());
     }
 

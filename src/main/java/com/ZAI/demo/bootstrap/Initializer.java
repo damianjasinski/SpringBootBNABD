@@ -56,7 +56,11 @@ public class Initializer implements CommandLineRunner {
         Category category1 = new Category(1L, "Fantasy");
         categoryRepository.save(category1);
 
-        Titles titles1 = new Titles(1L, List.of(5L), "https://image.posterlounge.pl/images/l/1899145.jpg", "Harry Potter and Chamber of Sins", 120, new HashSet<>(), new HashSet<>());
+        Titles titles1 = new Titles(5L, List.of(5L), "https://image.posterlounge.pl/images/l/1899145.jpg", "Harry Potter and Chamber of Sins", 120, new HashSet<>(), new HashSet<>());
         titlesRepository.save(titles1);
+
+        Seance seance1 = new Seance(1L, LocalDate.now().plusDays(1), 15, null, titles1);
+        Seance seance2 = new Seance(1L, LocalDate.now().plusDays(5), 125, null, titles1);
+        seanceRepository.saveAll(List.of(seance1, seance2));
     }
 }
