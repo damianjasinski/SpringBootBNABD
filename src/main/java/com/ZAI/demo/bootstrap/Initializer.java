@@ -37,6 +37,11 @@ public class Initializer implements CommandLineRunner {
 
         PaymentCard paymentCard = new PaymentCard("1234123412341234", LocalDate.now(), "334", user1, new HashSet<>());
         paymentCardRepository.save(paymentCard);
+        PaymentCard paymentCard2 = new PaymentCard("1234123412343433", LocalDate.now(), "123", user1, new HashSet<>());
+        paymentCardRepository.save(paymentCard2);
+
+        PaymentCard paymentCard3 = new PaymentCard("1234123412343438", LocalDate.now(), "123", user2, new HashSet<>());
+        paymentCardRepository.save(paymentCard3);
 
 
         seatRepository.deleteAll();

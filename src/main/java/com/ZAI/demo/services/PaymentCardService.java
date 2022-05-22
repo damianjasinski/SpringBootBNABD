@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -42,8 +43,15 @@ public class PaymentCardService {
     }
 
     public PaymentCard getPaymentCard(String cardNumber) {
-        System.out.println("xd");
         return paymentCardRepository.getByCardNumber(cardNumber).orElseThrow(() -> new NotFoundException("Card number not found"));
+    }
+
+    public List<PaymentCard> getMyPaymentCards(long id) {
+        List<PaymentCard> cards = paymentCardRepository.findAllByUsersId(id);
+        if (cards.size() == 0 ) {
+            throw new NotFoundException("No cards available");
+        }
+        return cards;
     }
 
 }

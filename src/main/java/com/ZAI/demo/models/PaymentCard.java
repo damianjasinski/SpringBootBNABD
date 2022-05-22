@@ -2,6 +2,7 @@ package com.ZAI.demo.models;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.apache.tomcat.jni.Local;
@@ -35,6 +36,7 @@ public class PaymentCard {
 
     @ManyToOne()
     @JoinColumn(nullable = false)
+    @JsonIgnore
     public Users users;
 
     @OneToMany(mappedBy = "paymentCard", fetch = FetchType.EAGER)
