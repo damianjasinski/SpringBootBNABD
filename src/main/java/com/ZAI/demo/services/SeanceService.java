@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,7 +42,7 @@ public class SeanceService {
     public List<Seance> displayCurrent() {
         return seanceRepository.findAll()
                 .stream()
-                .filter((x) -> x.getSeanceDate().isAfter(LocalDate.now().minusDays(1)))
+                .filter((x) -> x.getSeanceDate().isAfter(LocalDateTime.now().minusDays(1)))
                 .collect(Collectors.toList());
     }
 

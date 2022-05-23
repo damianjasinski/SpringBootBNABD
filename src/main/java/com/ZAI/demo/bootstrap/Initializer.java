@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -64,8 +65,8 @@ public class Initializer implements CommandLineRunner {
         Titles titles1 = new Titles(5L, List.of(5L), "https://image.posterlounge.pl/images/l/1899145.jpg", "Harry Potter and Chamber of Sins", 120, new HashSet<>(), new HashSet<>());
         titlesRepository.save(titles1);
 
-        Seance seance1 = new Seance(1L, LocalDate.now().plusDays(1), 15, null, titles1);
-        Seance seance2 = new Seance(1L, LocalDate.now().plusDays(5), 125, null, titles1);
+        Seance seance1 = new Seance(1L, LocalDateTime.now().plusDays(1), 15, null, titles1);
+        Seance seance2 = new Seance(1L, LocalDateTime.now().plusDays(5), 125, null, titles1);
         seanceRepository.saveAll(List.of(seance1, seance2));
     }
 }

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -23,9 +24,9 @@ public class Seance {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Basic
     @NotNull
-    LocalDate seanceDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    private LocalDateTime seanceDate;
 
     @NotNull
     int advertisementTime;
