@@ -4,6 +4,7 @@ package com.ZAI.demo.services;
 import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Order;
 import com.ZAI.demo.models.Seat;
+import com.ZAI.demo.models.SeatStatusResponse;
 import com.ZAI.demo.repository.OrderRepository;
 import com.ZAI.demo.repository.SeatRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,27 +38,18 @@ public class SeatService {
         }
     }
 
-    public List<Seat> getAvailableSeats(long seanceId) {
+    public List<SeatStatusResponse> getAvailableSeats(long seanceId) {
 
         List<Seat> seats = seatRepository.findAll();
-        List<Seat> availableSeats = new ArrayList<>();
+        List<SeatStatusResponse> availableSeats = new ArrayList<>();
         for (Seat seat : seats) {
             Optional<Order> isReserved = seat.getOrderSet().stream().filter((x) -> x.getSeance().getId() == seanceId)
                     .findAny();
             if (isReserved.isEmpty()) {
-                availableSeats.add(seat);
+                availableSeats.add(new SeatStatusResponse(seat.getId(), true));
             }
+            else availableSeats.add(new SeatStatusResponse(seat.getId(), false));
         }
         return availableSeats;
     }
-
-//    @PostConstruct
-//    public void init() {
-//        List<Seat> seats = new ArrayList<>(100);
-//        for (int i = 0; i < 100; i++) {
-//            seats.add(new Seat(i, new HashSet<>()));
-//        }
-//        seatRepository.saveAll(seats);
-//    }
-
 }

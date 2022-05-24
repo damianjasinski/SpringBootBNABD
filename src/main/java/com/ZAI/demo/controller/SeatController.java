@@ -1,6 +1,7 @@
 package com.ZAI.demo.controller;
 
 import com.ZAI.demo.models.Seat;
+import com.ZAI.demo.models.SeatStatusResponse;
 import com.ZAI.demo.services.SeatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,9 @@ import java.util.Map;
 public class SeatController {
     private final SeatService seatService;
 
-    @GetMapping("/get/reserved/{seanceId}")
-    public ResponseEntity<Map<String, List<Seat>>> getAvailableSeats(@PathVariable long seanceId){
-        List<Seat> reservedSeats = seatService.getAvailableSeats(seanceId);
-        return new ResponseEntity<>(Map.of("available seats", reservedSeats), HttpStatus.OK);
+    @GetMapping("/get/available/{seanceId}")
+    public ResponseEntity<Map<String, List<SeatStatusResponse>>> getAvailableSeats(@PathVariable long seanceId){
+        List<SeatStatusResponse> reservedSeats = seatService.getAvailableSeats(seanceId);
+        return new ResponseEntity<>(Map.of("seats", reservedSeats), HttpStatus.OK);
     }
 }
