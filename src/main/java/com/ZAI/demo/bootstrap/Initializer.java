@@ -48,7 +48,7 @@ public class Initializer implements CommandLineRunner {
         seatRepository.deleteAll();
 
         List<Seat> seats = new ArrayList<>(100);
-        for (long i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) {
             if (seatRepository.findById(i).isEmpty()) {
                 seats.add(new Seat(i + 1, new HashSet<>()));
             }

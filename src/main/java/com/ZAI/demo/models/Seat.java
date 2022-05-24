@@ -17,8 +17,9 @@ import java.util.Set;
 public class Seat {
 
     @Id
-    private long id;
+    private int id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "seat")
     private Set<Order> orderSet;
 
