@@ -40,7 +40,8 @@ public class LoginController implements SecuredController {
         Map<String, String> response = usersService.loginUser(login);
         return new ResponseEntity<>(Map.of("message", "succesfully logged in",
                 "jwt", response.get("jwt"),
-                "role", response.get("role")), HttpStatus.OK);
+                "role", response.get("role")
+        ,"id", response.get("id")), HttpStatus.OK);
     }
 
 

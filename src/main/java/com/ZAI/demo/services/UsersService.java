@@ -47,7 +47,10 @@ public class UsersService {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            return Map.of("jwt" ,jwtUtil.generateJwtToken(authentication), "role", authentication.getAuthorities().toString().replace("[", "").replace("]", ""));
+            return Map.of("jwt", jwtUtil.generateJwtToken(authentication),
+                    "role", authentication.getAuthorities().toString().replace("[", "").replace("]", ""),
+                    "id", String.valueOf(((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId())
+            );
         } catch (BadCredentialsException e) {
             throw new UsernameNotFoundException("email not found " + login.getEmail());
         }
