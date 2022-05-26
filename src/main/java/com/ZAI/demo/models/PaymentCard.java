@@ -2,6 +2,7 @@ package com.ZAI.demo.models;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -28,6 +29,7 @@ public class PaymentCard {
 
     @Basic
     @NotNull
+    @JsonFormat(pattern="yy/MM/dd")
     LocalDate expDate;
 
     @NotNull
@@ -36,7 +38,6 @@ public class PaymentCard {
 
     @ManyToOne()
     @JoinColumn(nullable = false)
-    @JsonIgnore
     public Users users;
 
     @OneToMany(mappedBy = "paymentCard", fetch = FetchType.EAGER)
