@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins ="http://localhost:3000")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/payment_card")
@@ -38,6 +39,7 @@ public class PaymentCardController implements SecuredController {
         return new ResponseEntity<>(pCard, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins ="http://localhost:3000")
     @DeleteMapping("/delete/{cardNumber}")
     public ResponseEntity<PaymentCard> deletePaymentCard(@PathVariable Long cardNumber) {
         PaymentCard pCard = paymentCardService.deletePaymentCard(cardNumber);

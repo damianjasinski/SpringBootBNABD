@@ -31,7 +31,7 @@ public class Users {
     private Long id;
 
     @NotBlank(message = "Firstname cannot be empty!")
-    String userFirstName;
+    String userFirstname;
 
     @NotBlank(message = "Surname cannot be empty!")
     String userSurname;

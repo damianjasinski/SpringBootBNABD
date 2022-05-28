@@ -4,6 +4,7 @@ import com.ZAI.demo.models.*;
 import com.ZAI.demo.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -22,17 +23,19 @@ public class Initializer implements CommandLineRunner {
     private final RoomRepository roomRepository;
     private final CategoryRepository categoryRepository;
     private final TitlesRepository titlesRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
+        String pwHash = passwordEncoder.encode("12345678");
 
-        Users user1 = new Users(null, "Jan", "Pankracy", "$2a$12$AvEer2LKlkZfiKlnXBHw../cSiMakfQxl3PyuEMt2gmt9Xa43dEju", LocalDate.now(),
+        Users user1 = new Users(null, "Jan", "Pankracy", pwHash, LocalDate.now(),
                 "pankracy@gmail.com", "USER", new HashSet<>(), new HashSet<>());
         usersRepository.save(user1);
-        Users user2 = new Users(null, "Jan", "Pankraxcy", "$2a$12$AvEer2LKlkZfiKlnXBHw../cSiMakfQxl3PyuEMt2gmt9Xa43dEju", LocalDate.now(),
+        Users user2 = new Users(null, "Jan", "Pankraxcy", pwHash, LocalDate.now(),
                 "pankrdacy@gmail.com", "USER", new HashSet<>(), new HashSet<>());
         usersRepository.save(user2);
-        Users user3 = new Users(null, "Jan", "panek", "$2a$12$AvEer2LKlkZfiKlnXBHw../cSiMakfQxl3PyuEMt2gmt9Xa43dEju", LocalDate.now(),
+        Users user3 = new Users(null, "Jan", "panek", pwHash, LocalDate.now(),
                 "panek@gmail.com", "ADMIN", new HashSet<>(), new HashSet<>());
         usersRepository.save(user3);
 
