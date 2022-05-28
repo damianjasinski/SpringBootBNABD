@@ -2,6 +2,7 @@ package com.ZAI.demo.controller;
 
 import com.ZAI.demo.models.Order;
 import com.ZAI.demo.models.Payment;
+import com.ZAI.demo.models.UserUpdateRequest;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.repository.UsersRepository;
 import com.ZAI.demo.security.MyUserDetails;
@@ -54,5 +55,11 @@ public class UsersController implements SecuredController {
     @GetMapping("/get/orders")
     public Set<Order> getUserOrders() {
         return orderService.getOrders(((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<Map<String, String>> updateUser(@RequestBody UserUpdateRequest userUpdate) {
+        usersService.updateUser(userUpdate);
+        return new ResponseEntity<>(Map.of("success", "password successfully changed"), HttpStatus.OK);
     }
 }

@@ -3,6 +3,7 @@ package com.ZAI.demo.services;
 import com.ZAI.demo.exceptions.NotFoundException;
 import com.ZAI.demo.models.Login;
 import com.ZAI.demo.models.Register;
+import com.ZAI.demo.models.UserUpdateRequest;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.repository.UsersRepository;
 import com.ZAI.demo.security.JwtUtil;
@@ -67,7 +68,7 @@ public class UsersService {
         }
         Users userToSave = Users.builder().email(
                         register.getEmail()).
-                userFirstName(register.getFirstname()).
+                userFirstname(register.getFirstname()).
                 userSurname(register.getSurname())
                 .role("USER")
                 .password(passwordEncoder.encode(register.getPassword()))
@@ -77,14 +78,37 @@ public class UsersService {
 
     }
 
+    public void updateUser(UserUpdateRequest userUpdate) {
+        Long userId = ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        if (!changeUserPassword(userUpdate.getOldPassword(), userUpdate.getNewPassword(), userId)) {
+            throw new NotFoundException("user not found");
+        }
+        if (!changeUserEmail(userUpdate.getNewEmail(), userId)) {
+            throw new NotFoundException("user not found");
+        }
+    }
 
-    public boolean changeUserPassword(String oldPassword, String newPassword, Long userId) {
+    private boolean changeUserPassword(String oldPassword, String newPassword, Long userId) {
         Optional<Users> user = usersRepository.findById(userId);
         if (user.isPresent()) {
-            if (user.get().getPassword().equals(oldPassword)) {
-                user.get().setPassword(newPassword);
+            if (!passwordEncoder.matches(oldPassword, user.get().getPassword())) {
+                throw new NotFoundException("wrong password");
+            } else {
+                user.get().setPassword(passwordEncoder.encode(newPassword));
+                usersRepository.save(user.get());
                 return true;
             }
+        }
+        return false;
+
+    }
+
+    private boolean changeUserEmail(String email, Long userId) {
+        Optional<Users> user = usersRepository.findById(userId);
+        if (user.isPresent()) {
+            user.get().setEmail(email);
+            usersRepository.save(user.get());
+            return true;
         }
         return false;
 
@@ -94,15 +118,4 @@ public class UsersService {
         return usersRepository.findById(id).orElseThrow(() -> new NotFoundException("User Not found"));
     }
 
-    public boolean changeUserEmail(String password, String email, Long userId) {
-        Optional<Users> user = usersRepository.findById(userId);
-        if (user.isPresent()) {
-            if (user.get().getPassword().equals(password)) {
-                user.get().setEmail(email);
-                return true;
-            }
-        }
-        return false;
-
-    }
 }
