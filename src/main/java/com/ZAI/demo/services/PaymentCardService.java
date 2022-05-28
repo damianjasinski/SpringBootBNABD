@@ -10,12 +10,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class PaymentCardService {
@@ -32,10 +34,10 @@ public class PaymentCardService {
     }
 
     public PaymentCard deletePaymentCard(Long cardNumber) {
-        Optional<PaymentCard> checkCard = paymentCardRepository.findById(cardNumber);
+        Optional<PaymentCard> checkCard = paymentCardRepository.getByCardNumber(String.valueOf(cardNumber));
         if (checkCard.isPresent()) {
             if (checkCard.get().getUsers().getId() == ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ) {
-                paymentCardRepository.deleteById(cardNumber);
+                paymentCardRepository.deleteByCardNumber(String.valueOf(cardNumber));
                 return checkCard.get();
             }
         }

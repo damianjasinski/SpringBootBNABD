@@ -12,5 +12,6 @@ import java.util.Optional;
 public interface PaymentCardRepository extends JpaRepository<PaymentCard, Long> {
     Optional<PaymentCard> getByCardNumber(String cardNumber);
     List<PaymentCard> findAllByUsersId(long id);
+    void deleteByCardNumber(String cardNumber);
 }
 
