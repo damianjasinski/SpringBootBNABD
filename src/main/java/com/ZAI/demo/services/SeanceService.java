@@ -6,6 +6,8 @@ import com.ZAI.demo.models.Users;
 import com.ZAI.demo.repository.RoomRepository;
 import com.ZAI.demo.repository.SeanceRepository;
 import lombok.AllArgsConstructor;
+import net.bytebuddy.TypeCache;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -46,6 +48,13 @@ public class SeanceService {
                 .collect(Collectors.toList());
     }
 
-    public List<Seance> displayAll() {return seanceRepository.findAll();}
+    public List<Seance> displayAll(long order) {
+        if (order == 1){
+            return seanceRepository.findAll(Sort.by(Sort.Direction.DESC, "seanceDate"));
+        }else{
+            return seanceRepository.findAll(Sort.by(Sort.Direction.ASC, "seanceDate"));
+        }
+
+    }
 
 }

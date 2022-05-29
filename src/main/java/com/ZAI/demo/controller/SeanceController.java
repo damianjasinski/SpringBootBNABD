@@ -1,6 +1,7 @@
 package com.ZAI.demo.controller;
 
 import com.ZAI.demo.models.Seance;
+import com.ZAI.demo.models.SeatStatusResponse;
 import com.ZAI.demo.models.Users;
 import com.ZAI.demo.services.SeanceService;
 import lombok.Data;
@@ -32,9 +33,15 @@ public class SeanceController implements SecuredController {
 
     }
 
-    @GetMapping("/get/all")
-    public ResponseEntity<Map<String, List<Seance>>> displaySeances(){
-        List<Seance> seance = seanceService.displayAll();
+//    @GetMapping("/get/all")
+//    public ResponseEntity<Map<String, List<Seance>>> displaySeances(){
+//        List<Seance> seance = seanceService.displayAll();
+//        return new ResponseEntity<>(Map.of("seances", seance), HttpStatus.OK);
+//    }
+
+    @GetMapping("/get/all/{order}")
+    public ResponseEntity<Map<String, List<Seance>>> getAvailableSeats(@PathVariable long order){
+        List<Seance> seance = seanceService.displayAll(order);
         return new ResponseEntity<>(Map.of("seances", seance), HttpStatus.OK);
     }
 
