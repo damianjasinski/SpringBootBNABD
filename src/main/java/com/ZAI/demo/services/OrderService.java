@@ -41,7 +41,11 @@ public class OrderService {
     }
 
     public Set<Order> getOrders(long userId) {
-        return usersRepository.getById(userId).getOrderSet();
+        if (userId == ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()) {
+            return orderRepository.findByUsersIdOrderByCreatedAtDesc(userId);
+//            return orderRepository.findByUs(userId).getOrderSet();
+        }
+        throw new NotFoundException("You can't get other user orders");
     }
 
 

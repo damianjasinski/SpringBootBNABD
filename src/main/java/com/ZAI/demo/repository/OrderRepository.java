@@ -10,4 +10,5 @@ import java.util.Set;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
     Set<Order> findBySeanceId(long id);
+    Set<Order> findByUsersIdOrderByCreatedAtDesc(long userId);
 }
