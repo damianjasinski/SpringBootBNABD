@@ -29,12 +29,13 @@ public class Payment {
     @NotNull
     int ammount;
 
-    @Basic
     LocalDate createdAt;
 
     @NotNull
     boolean finalized;
 
+
+    @JsonBackReference
     @ManyToOne()
     @JoinColumn(nullable = false)
     private PaymentCard paymentCard;

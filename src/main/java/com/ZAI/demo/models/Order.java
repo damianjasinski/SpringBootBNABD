@@ -24,6 +24,8 @@ public class Order implements Serializable {
     private long id;
     LocalDate createdAt;
 
+
+    @JsonBackReference
     @ManyToOne()
     private Users users;
 

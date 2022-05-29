@@ -50,9 +50,12 @@ public class Users {
 
     String role = "USER";
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "users")
     private Set<Order> orderSet;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "users")
     public Set<PaymentCard> paymentCardSet;
 
