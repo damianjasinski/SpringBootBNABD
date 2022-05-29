@@ -49,10 +49,12 @@ public class SeanceService {
     }
 
     public List<Seance> displayAll(long order) {
-        if (order == 1){
+        if (order == -1){
             return seanceRepository.findAll(Sort.by(Sort.Direction.DESC, "seanceDate"));
-        }else{
+        }else if(order == 1){
             return seanceRepository.findAll(Sort.by(Sort.Direction.ASC, "seanceDate"));
+        }else{
+            throw new NotFoundException("Not found this kind of sorting");
         }
 
     }
