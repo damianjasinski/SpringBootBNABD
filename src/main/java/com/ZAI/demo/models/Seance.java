@@ -16,9 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+
 public class Seance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
