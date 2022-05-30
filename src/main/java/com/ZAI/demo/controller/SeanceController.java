@@ -33,11 +33,11 @@ public class SeanceController implements SecuredController {
 
     }
 
-//    @GetMapping("/get/all")
-//    public ResponseEntity<Map<String, List<Seance>>> displaySeances(){
-//        List<Seance> seance = seanceService.displayAll();
-//        return new ResponseEntity<>(Map.of("seances", seance), HttpStatus.OK);
-//    }
+    @GetMapping("/get/all")
+    public ResponseEntity<Map<String, List<Seance>>> displaySeances(){
+        List<Seance> seance = seanceService.displayAll(0);
+        return new ResponseEntity<>(Map.of("seances", seance), HttpStatus.OK);
+    }
 
     @GetMapping("/get/all/{order}")
     public ResponseEntity<Map<String, List<Seance>>> getAvailableSeats(@PathVariable long order){

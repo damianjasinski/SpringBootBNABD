@@ -29,14 +29,14 @@ public class SeanceService {
         return seanceRepository.save(seance);
     }
 
-    public Seance modifySeance(Seance seance){
-        Optional <Seance> seances = seanceRepository.findById(seance.getId());
-        if(seances.isPresent()){
+    public Seance modifySeance(Seance seance) {
+        Optional<Seance> seances = seanceRepository.findById(seance.getId());
+        if (seances.isPresent()) {
             seances.get().setAdvertisementTime(seance.getAdvertisementTime());
             seances.get().setTitles(seance.getTitles());
             seances.get().setSeanceDate(seance.getSeanceDate());
             return seance;
-        }else{
+        } else {
             throw new NotFoundException("Seance number not found");
         }
     }
@@ -49,14 +49,11 @@ public class SeanceService {
     }
 
     public List<Seance> displayAll(long order) {
-        if (order == -1){
+        if (order == -1) {
             return seanceRepository.findAll(Sort.by(Sort.Direction.DESC, "seanceDate"));
-        }else if(order == 1){
+        } else {
             return seanceRepository.findAll(Sort.by(Sort.Direction.ASC, "seanceDate"));
-        }else{
-            throw new NotFoundException("Not found this kind of sorting");
         }
-
     }
 
 }
