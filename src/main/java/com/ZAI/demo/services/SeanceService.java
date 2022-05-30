@@ -41,6 +41,14 @@ public class SeanceService {
         }
     }
 
+    public void deleteSeance(long id) {
+        Optional<Seance> seance = seanceRepository.findById(id);
+        if ( seance.isEmpty()) {
+            throw new NotFoundException("Seance not found");
+        }
+        seanceRepository.deleteById(id);
+    }
+
     public List<Seance> displayCurrent() {
         return seanceRepository.findAll()
                 .stream()

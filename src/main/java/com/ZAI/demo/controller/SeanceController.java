@@ -51,4 +51,9 @@ public class SeanceController implements SecuredController {
         return new ResponseEntity<>(Map.of("seances", seance), HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Map<String, String>> deleteSeance(@PathVariable Long id) {
+        seanceService.deleteSeance(id);
+        return new ResponseEntity<>(Map.of("success", "successfully deleted seance"), HttpStatus.OK);
+    }
 }
