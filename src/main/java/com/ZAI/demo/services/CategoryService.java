@@ -8,6 +8,7 @@ import com.ZAI.demo.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -15,9 +16,17 @@ import java.util.Optional;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
-    public void addCategory(Category category){
+    public void addCategory(Category category) {
+        if (categoryRepository.findById(category.getId()).isPresent()) {
+            throw new NotFoundException("Category duplicate");
+        }
         categoryRepository.save(category);
     }
+
+    public List<Category> getCategories(){
+        return categoryRepository.findAll();
+    }
+
 
     public void removeCategory(String name){
         Optional<Category> category = categoryRepository.findByName(name);

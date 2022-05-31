@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,5 +28,10 @@ public class CategoryController implements SecuredController {
     public ResponseEntity<String> deleteCategory(@PathVariable String category_name){
         categoryService.removeCategory(category_name);
         return new ResponseEntity<>("Category removed", HttpStatus.OK);
+    }
+
+    @GetMapping("/get/all")
+    public List<Category> getCategories(){
+        return categoryService.getCategories();
     }
 }
