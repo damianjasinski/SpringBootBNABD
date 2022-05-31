@@ -20,14 +20,14 @@ public class TitlesService {
     private final TitlesRepository titlesRepository;
     private final CategoryRepository categoryRepository;
 
-    public Titles addTitles(Titles titles){
+    public Titles addTitles(Titles titles) {
         List<Category> categories = categoryRepository.findAllById(titles.getCategoriesId());
         if (categories.size() == 0) {
             throw new NotFoundException("Category not found");
         }
-        if (categories.size() != titles.getCategoriesId().size()){
+        if (categories.size() != titles.getCategoriesId().size()) {
             throw new NotFoundException("Category not found");
-        }else{
+        } else {
             Set<Category> categorySet = titles.getCategorySet();
             if (categorySet == null) {
                 categorySet = new HashSet<>();
@@ -39,12 +39,12 @@ public class TitlesService {
 
     }
 
-    public Titles removeTitles(String name){
-        Optional <Titles> titles = titlesRepository.findByName(name);
-        if (titles.isPresent()){
+    public Titles removeTitles(String name) {
+        Optional<Titles> titles = titlesRepository.findByName(name);
+        if (titles.isPresent()) {
             titlesRepository.deleteById(titles.get().getId());
             return titles.get();
-        }else{
+        } else {
             throw new NotFoundException("Title not found");
         }
     }

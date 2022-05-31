@@ -35,7 +35,7 @@ public class SeanceController implements SecuredController {
 
     @GetMapping("/get/all")
     public ResponseEntity<Map<String, List<Seance>>> displaySeances(){
-        List<Seance> seance = seanceService.displayAll(0);
+        List<Seance> seance = seanceService.displayAll(0    );
         return new ResponseEntity<>(Map.of("seances", seance), HttpStatus.OK);
     }
 
