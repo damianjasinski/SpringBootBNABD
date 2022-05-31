@@ -48,4 +48,8 @@ public class TitlesService {
             throw new NotFoundException("Title not found");
         }
     }
+
+    public List<Titles> getTitles() {
+        return titlesRepository.findAll();
+    }
 }

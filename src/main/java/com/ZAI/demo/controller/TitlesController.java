@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -16,6 +17,11 @@ import java.util.Map;
 @RequestMapping("/api/titles")
 public class TitlesController implements SecuredController {
     private final TitlesService titlesService;
+
+    @GetMapping("/get/all")
+    public ResponseEntity<Map<String, List<Titles>>> getTitles(){
+        return new ResponseEntity<>(Map.of("data", titlesService.getTitles()), HttpStatus.OK);
+    }
 
     @PostMapping("/add")
     public ResponseEntity<Titles> addTitles(@Valid @RequestBody Titles titles){
@@ -28,5 +34,7 @@ public class TitlesController implements SecuredController {
         Titles titles = titlesService.removeTitles(name);
         return new ResponseEntity<>(Map.of("Title removed succesfully", titles), HttpStatus.OK);
     }
+
+
 
 }
