@@ -25,6 +25,12 @@ public class SeanceService {
     private final RoomService roomService;
 
     public Seance addSeance(Seance seance) {
+        Optional<Seance> isThisDuplicate = seanceRepository.findBySeanceDate(seance.getSeanceDate());
+        if (isThisDuplicate.isPresent()) {
+            if (isThisDuplicate.get().getRoomId() == seance.getRoomId()) {
+                throw new NotFoundException("identical senace can't be add");
+            }
+        }
         roomService.addSeanceToRoom(seance);
         return seanceRepository.save(seance);
     }

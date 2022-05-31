@@ -23,7 +23,7 @@ public class Seance {
     private long id;
 
     @NotNull
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private LocalDateTime seanceDate;
 
     @NotNull
