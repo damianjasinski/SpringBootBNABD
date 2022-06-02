@@ -49,11 +49,7 @@ public class PaymentCardService {
     }
 
     public List<PaymentCard> getMyPaymentCards(long id) {
-        List<PaymentCard> cards = paymentCardRepository.findAllByUsersId(id);
-        if (cards.size() == 0 ) {
-            throw new NotFoundException("No cards available");
-        }
-        return cards;
+        return paymentCardRepository.findAllByUsersId(id);
     }
 
 }
